@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "wolf3d.h"
 
 void			pixel_put(t_env *px, int x, int y, t_frgba c)
 {

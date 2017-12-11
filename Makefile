@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = rtv1
+NAME = wolf3d
 
 SRC_PATH = src
 
@@ -18,7 +18,7 @@ LIBFT = ./libft/libft.a
 
 LIBMLX = ./mlx/libmlx.a
 
-SRC_NAME = main.c input.c graphic.c utils.c init.c ft_ray.c ft_sphere.c ft_cam.c
+SRC_NAME = main.c input.c graphic.c utils.c init.c
 
 OBJ_PATH = obj
 

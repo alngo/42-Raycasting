@@ -10,14 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "wolf3d.h"
 
-int				main(int ac, char **av)
+void			init_map(t_env *e, t_map *map, const char` *file)
+{
+	int		fd;
+	char		*line;
+	char		**tmp;
+
+	if ((fd = open(file, O_RDONLY)) == -1)
+		checkout(e, strerror(errno));
+	while (get_next_line(fd, &line))
+	{
+		if (!(tmp = ft_strsplit(line, ' ')))
+			checkout(e, "ft_strsplit() error.");
+		if (!(tmp[0]) || !(ft_foreachstr(tmp, &check_data)))
+			checkout(e, "ft_check_data() error.");
+
+	}
+}
+
+int			main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	t_env			e;
+	t_env		e;
 
+	init_map(e, &(e.map), av[1]);
 	init_env(&e);
 	mlx_key_hook(e.mlx.win, key_hook, &e);
 	mlx_hook(e.mlx.win, 2, 0, key_pressed, &e);
