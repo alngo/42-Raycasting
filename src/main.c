@@ -12,9 +12,10 @@
 
 #include "wolf3d.h"
 
-int			pr(char *str)
+int			data_check(char *str)
 {
-	ft_printf("%s\n", str);
+	if (!(*str >= '0' && *str <= '9'))
+		return (0);
 	return (1);
 }
 
@@ -31,20 +32,24 @@ void			init_map(t_env *e, t_map *map, const char *file)
 	{
 		if (!(tmp = ft_strsplit(line, ' ')))
 			checkout(e, "ft_strsplit() error.");
-		if (!(tmp[0]) || !(ft_foreachstr(tmp, &pr)))
+		if (!(tmp[0]) || !(ft_foreachstr(tmp, &data_check)))
 			checkout(e, "ft_check_data() error.");
-
 	}
 }
 
 int			main(int ac, char **av)
 {
 	(void)ac;
-	(void)av;
 	t_env		e;
 
+	e.mlx.win = NULL;
+	e.mlx.img = NULL;
+	e.map.block = NULL;
+	e.map.w = 0;
+	e.map.h = 0;
 	init_map(&e, &(e.map), av[1]);
 	init_env(&e);
+	hello_world(&e);
 	mlx_key_hook(e.mlx.win, key_hook, &e);
 	mlx_hook(e.mlx.win, 2, 0, key_pressed, &e);
 	mlx_loop(e.mlx.mlx);

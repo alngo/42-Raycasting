@@ -3,6 +3,7 @@
 # include "../libft/include/libft.h"
 # include "../mlx/mlx.h"
 # include <fcntl.h>
+# include <errno.h>
 # include <string.h>
 # include "x11.h"
 
@@ -16,14 +17,13 @@ typedef struct		s_cam
 {
 	t_vec2d		pos;
 	t_vec2d		dir;
-	t_vec2d		plane;
 }			t_cam;
 
 typedef struct		s_map
 {
 	int		h;
 	int		w;
-	int		*dot;
+	int		*block;
 }			t_map;
 
 typedef struct		s_mlx
@@ -61,6 +61,7 @@ int			key_pressed(int key, t_env *e);
 ** === utils.c ===
 */
 void			checkout(t_env *e, char *s);
+void			hello_world(t_env *e);
 /*
 ** === init.c ===
 */
