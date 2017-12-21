@@ -12,19 +12,26 @@
 
 #include "wolf3d.h"
 
-void			init_map(t_env *e, t_map *map, const char` *file)
+int			pr(char *str)
+{
+	ft_printf("%s\n", str);
+	return (1);
+}
+
+void			init_map(t_env *e, t_map *map, const char *file)
 {
 	int		fd;
 	char		*line;
 	char		**tmp;
 
+	(void)map;
 	if ((fd = open(file, O_RDONLY)) == -1)
 		checkout(e, strerror(errno));
 	while (get_next_line(fd, &line))
 	{
 		if (!(tmp = ft_strsplit(line, ' ')))
 			checkout(e, "ft_strsplit() error.");
-		if (!(tmp[0]) || !(ft_foreachstr(tmp, &check_data)))
+		if (!(tmp[0]) || !(ft_foreachstr(tmp, &pr)))
 			checkout(e, "ft_check_data() error.");
 
 	}
@@ -36,7 +43,7 @@ int			main(int ac, char **av)
 	(void)av;
 	t_env		e;
 
-	init_map(e, &(e.map), av[1]);
+	init_map(&e, &(e.map), av[1]);
 	init_env(&e);
 	mlx_key_hook(e.mlx.win, key_hook, &e);
 	mlx_hook(e.mlx.win, 2, 0, key_pressed, &e);

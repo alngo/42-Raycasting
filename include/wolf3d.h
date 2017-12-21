@@ -2,6 +2,8 @@
 # define RTV1_H
 # include "../libft/include/libft.h"
 # include "../mlx/mlx.h"
+# include <fcntl.h>
+# include <string.h>
 # include "x11.h"
 
 # define WIDTH 	900
