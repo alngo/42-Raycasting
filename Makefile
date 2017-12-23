@@ -18,9 +18,17 @@ LIBFT = ./libft/libft.a
 
 LIBMLX = ./mlx/libmlx.a
 
-SRC_NAME = main.c input.c graphic.c utils.c init.c
+SRC_NAME =	main.c\
+		input.c\
+		graphic.c\
+		utils.c\
+		init/init.c\
+		init/init_map_info.c\
+		init/init_map_block.c\
 
 OBJ_PATH = obj
+
+SUB_PATH = /{init,}
 
 INCLUDE_PATH = -I include
 
@@ -52,7 +60,7 @@ deps:
 
 
 $(OBJ_PATH):
-	@mkdir $(OBJ_PATH) 2> /dev/null || true
+	@mkdir -p $(OBJ_PATH)$(SUB_PATH) 2> /dev/null || true
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	$(CC) $(CFLAGS) $(INCLUDE_PATH) -MMD -MP -g -c $^ -o $@

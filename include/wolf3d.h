@@ -24,6 +24,7 @@ typedef struct		s_map
 	int		h;
 	int		w;
 	int		*block;
+	char		*name;
 }			t_map;
 
 typedef struct		s_mlx
@@ -51,11 +52,11 @@ void			proceed(t_env *e);
 /*
 ** === graphic.c ===
 */
-void			pixel_put(t_env *px, int x, int y, t_frgba c);
+void			img_pixel_put(t_env *e, int x, int y, t_frgba c);
+void			img_fill(t_env *e, t_frgba c);
 /*
 ** === input.c ===
 */
-int			key_hook(int key, t_env *e);
 int			key_pressed(int key, t_env *e);
 /*
 ** === utils.c ===
@@ -66,5 +67,15 @@ void			hello_world(t_env *e);
 ** === init.c ===
 */
 void			init_env(t_env *e);
+void			init_map(t_env *e, const char *file);
+/*
+** === init_map_info.c ===
+*/
+int			get_map_info(t_env *e, const int fd);
+/*
+** === init_map_block.c ===
+*/
+int			get_map_block(t_env *e, const int fd);
+
 
 #endif

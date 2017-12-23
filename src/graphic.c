@@ -12,12 +12,12 @@
 
 #include "wolf3d.h"
 
-void			pixel_put(t_env *px, int x, int y, t_frgba c)
+void			img_pixel_put(t_env *e, int x, int y, t_frgba c)
 {
 	int		i;
 	t_mlx	mlx;
 
-	mlx = px->mlx;
+	mlx = e->mlx;
 	i = (mlx.sln * y) + (x * (mlx.bpp / 8));
 	if (mlx.end == 1)
 	{
@@ -32,5 +32,23 @@ void			pixel_put(t_env *px, int x, int y, t_frgba c)
 		mlx.adr[i + 1] = c.g;
 		mlx.adr[i + 2] = c.r;
 		mlx.adr[i + 3] = c.a;
+	}
+}
+
+void			img_fill(t_env *e, t_frgba c)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			img_pixel_put(e, x, y, c);
+			x++;
+		}
+		y++;
 	}
 }

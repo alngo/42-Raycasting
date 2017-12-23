@@ -12,18 +12,11 @@
 
 #include "wolf3d.h"
 
-int				key_hook(int key, t_env *e)
-{
-	if (key == 53)
-		checkout(e, "Bye bye !");
-	return (0);
-}
-
 int				key_pressed(int key, t_env *e)
 {
 	if (key == 53)
 		checkout(e, "Bye bye !");
 	else
-		printf("[%d]\n", key);
+		ft_printf("[%d]\n", key);
 	return (0);
 }

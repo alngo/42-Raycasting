@@ -18,6 +18,10 @@ void			checkout(t_env *e, char *s)
 		mlx_destroy_image(e->mlx.mlx, e->mlx.img);
 	if (e->mlx.win)
 		mlx_destroy_window(e->mlx.mlx, e->mlx.win);
+	if (e->map.name)
+		free(e->map.name);
+	if (e->map.block)
+		free(e->map.block);
 	if (s)
 		ft_putendl(s);
 	exit(0);
@@ -42,7 +46,7 @@ void			hello_world(t_env *e)
 			tmp.r = col.r * 255.99;
 			tmp.g = col.g * 255.99;
 			tmp.b = col.b * 255.99;
-			pixel_put(e, i, j, tmp);	
+			img_pixel_put(e, i, j, tmp);	
 			i--;
 		}
 		j--;
