@@ -47,5 +47,6 @@ int			get_map_info(t_env *e, const int fd)
 	}
 	if (!(e->map.w) || !(e->map.h) || e->map.w > 50 || e->map.h > 50)
 		return (0);
+	e->map.max = e->map.w * e->map.h;
 	return (1);
 }

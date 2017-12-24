@@ -9,21 +9,40 @@
 
 # define WIDTH 	900
 # define HEIGHT 600
-# define TRUE	1
-# define FALSE	0
-
 
 typedef struct		s_cam
 {
 	t_vec2d		pos;
 	t_vec2d		dir;
+	t_vec2d		plane;
 }			t_cam;
+
+typedef struct		s_ray
+{
+	t_vec2d		pos;
+	t_vec2d		dir;
+	t_vec2d		d_side;
+	t_vec2d		d_delta;
+	t_vec2d		step;
+	t_bool		hit;
+	t_bool		side;
+	double		wall;
+}			t_ray;
+
+typedef struct		s_line
+{
+	t_vec2d		start;
+	t_vec2d		end;
+	t_frgba		col;
+	t_bool		side;
+}			t_line;
 
 typedef struct		s_map
 {
 	int		h;
 	int		w;
 	int		*block;
+	int		max;
 	char		*name;
 }			t_map;
 
@@ -43,12 +62,14 @@ typedef struct		s_env
 	t_mlx		mlx;
 	t_cam		cam;
 	t_map		map;
+	t_ray		ray;
+	t_line		line;
 }			t_env;
 
 /*
 **	=== main.c ===
 */
-void			proceed(t_env *e);
+void			render(t_env *e);
 /*
 ** === graphic.c ===
 */
@@ -63,11 +84,12 @@ int			key_pressed(int key, t_env *e);
 */
 void			checkout(t_env *e, char *s);
 void			hello_world(t_env *e);
+void			show_map_block(t_map *map);
 /*
 ** === init.c ===
 */
-void			init_env(t_env *e);
-void			init_map(t_env *e, const char *file);
+void			init_env(t_env *e, const char *file);
+void			init_null_secure(t_env *e);
 /*
 ** === init_map_info.c ===
 */

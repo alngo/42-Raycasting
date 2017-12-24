@@ -26,6 +26,29 @@ void			checkout(t_env *e, char *s)
 		ft_putendl(s);
 	exit(0);
 }
+
+void			show_map_block(t_map *map)
+{
+	int		x;
+	int		y;
+	int		i;
+	
+	i = 0;
+	y = 0;
+	while (y < map->h)
+	{
+		x = 0;
+		while (x < map->w)
+		{
+			ft_printf("[%d]", map->block[i]);
+			i++;
+			x++;
+		}
+		ft_printf("\n");
+		y++;
+	}
+}
+
 void			hello_world(t_env *e)
 {
 	int		i;

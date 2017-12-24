@@ -15,9 +15,10 @@ static int		stock_map_block(t_env *e, char **data)
 		return (0);
 	while (*data)
 	{
-		if (index == (e->map.w * e->map.h))
+		if (index == e->map.max)
 			break;
 		e->map.block[index] = ft_atoi(*data);
+		free(*data);
 		data++;
 		index++;
 	}
@@ -29,7 +30,7 @@ int			get_map_block(t_env *e, const int fd)
 	char		*line;
 	char		**tmp;
 
-	if (!(e->map.block = (int *)ft_memalloc(sizeof(int) * (e->map.w * e->map.h))))
+	if (!(e->map.block = (int *)ft_memalloc(sizeof(int) * e->map.max)))
 		return (0);
 	while (get_next_line(fd, &line))
 	{
@@ -38,6 +39,7 @@ int			get_map_block(t_env *e, const int fd)
 		free(line);
 		if (!(stock_map_block(e, tmp)))
 			return (0);
+		free(tmp);
 	}
 	return (1);
 }
