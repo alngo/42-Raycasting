@@ -157,6 +157,7 @@ int			main(int ac, char **av)
 	(void)ac;
 	t_env		e;
 
+	init_null_secure(&e);
 	init_env(&e, av[1]);
 	render(&e);
 	mlx_hook(e.mlx.win, 2, 0, key_pressed, &e);
