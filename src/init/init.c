@@ -40,10 +40,8 @@ static	void		init_cam(t_env *e, t_cam *cam, t_map *map)
 	if (max == -1)
 		checkout(e, "init_cam() error.");
 	div = ft_ldiv(max, map->w);
-//	cam->pos.y = (double)div.quot + 1;
-//	cam->pos.x = (double)div.rem + 1;
-	cam->pos.y = 12;
-	cam->pos.x = 22;
+	cam->pos.y = (double)div.quot;
+	cam->pos.x = (double)div.rem;
 	cam->dir.y = 0;
 	cam->dir.x = -1;
 
