@@ -7,8 +7,8 @@
 # include <string.h>
 # include "x11.h"
 
-# define WIDTH 	900
-# define HEIGHT 600
+# define WIDTH		900
+# define HEIGHT		600
 
 # define SPEED		0.1
 # define MOVE_FORWARD	0b00000001
@@ -17,6 +17,9 @@
 # define STRAFE_RIGHT 	0b00001000
 # define ROTATE_RIGHT 	0b00010000
 # define ROTATE_LEFT 	0b00100000
+
+# define TEXTURE_WIDTH	64
+# define TEXTURE_HEIGHT	64
 
 typedef struct		s_cam
 {
@@ -80,6 +83,26 @@ typedef struct		s_env
 */
 void			render(t_env *e);
 /*
+** ===================== INIT.C =-=========================
+** init_null_secure
+** init_map
+** init_cam
+*/
+void			init_env(t_env *e, const char *file);
+/*
+** ===================== GET_MAP_INFO.C ===================
+** stock_map_info
+** stock_map_name
+*/
+int			get_map_info(t_env *e, const int fd);
+/*
+** ===================== GET_MAP_BLOCK.C ==================
+** check_map_block
+** stock_map_block
+** check_map_block
+*/
+int			get_map_block(t_env *e, const int fd);
+/*
 ** ===================== RAY.C ===============================
 ** ray_init_calc
 ** ray_step_calc
@@ -119,27 +142,7 @@ void			rotate(t_env *e, int key);
 */
 void			checkout(t_env *e, char *s);
 void			hello_world(t_env *e);
-void			show_map_block(t_map *map);
-/*
-** ===================== INIT.C =-=========================
-** init_null_secure
-** init_map
-** init_cam
-*/
-void			init_env(t_env *e, const char *file);
-/*
-** ===================== GET_MAP_INFO.C ===================
-** stock_map_info
-** stock_map_name
-*/
-int			get_map_info(t_env *e, const int fd);
-/*
-** ===================== GET_MAP_BLOCK.C ==================
-** check_map_block
-** stock_map_block
-** check_map_block
-*/
-int			get_map_block(t_env *e, const int fd);
+void			show_block(int *arr, int w, size_t len);
 
 
 #endif

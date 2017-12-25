@@ -79,7 +79,7 @@ void			init_env(t_env *e, const char *file)
 	e->mlx.adr = mlx_get_data_addr(e->mlx.img, &(e->mlx.bpp)
 			, &(e->mlx.sln), &(e->mlx.end));
 	ft_printf("Init done !\nMap:\n");
-	show_map_block(&e->map);
+	show_block(e->map.block, e->map.w, e->map.max);
 	ft_printf("Camera position:\n[%d][%d]\n", (int)e->cam.pos.x, (int)e->cam.pos.y);
 }
 

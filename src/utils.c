@@ -15,26 +15,19 @@ void			checkout(t_env *e, char *s)
 	exit(0);
 }
 
-void			show_map_block(t_map *map)
+void			show_block(int *arr, int w, size_t len)
 {
-	int		x;
-	int		y;
-	int		i;
-	
+	size_t		i;
+
 	i = 0;
-	y = 0;
-	while (y < map->h)
+	while (i < len)
 	{
-		x = 0;
-		while (x < map->w)
-		{
-			ft_printf("[%d]", map->block[i]);
-			i++;
-			x++;
-		}
-		ft_printf("\n");
-		y++;
+		if (!(i % w) && i)
+			ft_printf("\n");
+		ft_printf("[%d]", arr[i]);
+		i++;
 	}
+	ft_printf("\n");
 }
 
 void			hello_world(t_env *e)

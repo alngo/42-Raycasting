@@ -27,10 +27,8 @@ static void		line_get_color(t_map *map, t_line *line, int *mapx, int *mapy)
 		line->col = ft_frgba(0, 0, 255, 0);
 	else if (map->block[*mapy * map->w + *mapx] == 4)
 		line->col = ft_frgba(255, 255, 255, 0);
-	else if (map->block[*mapy * map->w + *mapx] == 5)
-		line->col = ft_frgba(255, 255, 0, 0);
 	else 
-		line->col = ft_frgba(0, 0, 0, 0);
+		line->col = ft_frgba(50, 50, 50, 0);
 	if (line->side)
 		line->col = shadow(line->col);
 }
