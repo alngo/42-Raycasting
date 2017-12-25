@@ -38,12 +38,14 @@ void			line_draw(t_env *e, t_line *line)
 {
 	int		x;
 	int		y;
+	t_frgba		col;
 	
 	x = line->start.x;
 	y = line->start.y;
+	col = line->shadow ? shadow(line->col) : line->col;
 	while (y < line->end.y)
 	{
-		img_pixel_put(e, x, y, line->col);
+		img_pixel_put(e, x, y, col);
 		y++;
 	}
 }

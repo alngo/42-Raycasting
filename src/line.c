@@ -14,28 +14,43 @@ static void		line_init_calc(t_ray *ray, t_line *line, int x)
 	line->start.x = x;
 	line->end.x = x;
 	line->side = ray->side;
+	line->texture = false;
+	line->shadow = false;
 }
 
-
-static void		line_get_color(t_map *map, t_line *line, int *mapx, int *mapy)
+static void		line_set_basic_color(t_line *line, int block)
 {
-	if (map->block[*mapy * map->w + *mapx] == 1)
+	if (block == 1)
 		line->col = ft_frgba(255, 0, 0, 0);
-	else if (map->block[*mapy * map->w + *mapx] == 2)
+	else if (block == 2)
 		line->col = ft_frgba(0, 255, 0, 0);
-	else if (map->block[*mapy * map->w + *mapx] == 3)
+	else if (block == 3)
 		line->col = ft_frgba(0, 0, 255, 0);
-	else if (map->block[*mapy * map->w + *mapx] == 4)
+	else if (block == 4)
 		line->col = ft_frgba(255, 255, 255, 0);
+}
+
+static void		line_get_type(t_map *map, t_line *line, int *mapx, int *mapy)
+{
+	int		block;
+
+	block = map->block[*mapy * map->w + *mapx];
+	if (block >= 1 && block <= 4)
+		line_set_basic_color(line, block);
+	else if (block >= 5 && block <= 12)
+	{
+		line->texture_number = block - 5;
+		line->texture = true;
+	}
 	else 
 		line->col = ft_frgba(50, 50, 50, 0);
 	if (line->side)
-		line->col = shadow(line->col);
+		line->shadow = true;
 }
 
 void			line_cast(t_env *e, int *mapx, int *mapy, int x)
 {
 	line_init_calc(&e->ray, &e->line, x);
-	line_get_color(&e->map, &e->line, mapx, mapy);
+	line_get_type(&e->map, &e->line, mapx, mapy);
 	line_draw(e, &e->line);
 }

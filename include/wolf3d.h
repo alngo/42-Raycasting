@@ -21,6 +21,11 @@
 # define TEXTURE_WIDTH	64
 # define TEXTURE_HEIGHT	64
 
+typedef struct		s_hard_texture
+{
+	int		texture[8][TEXTURE_WIDTH * TEXTURE_HEIGHT];
+}			t_hard_texture;
+
 typedef struct		s_cam
 {
 	t_vec2d		pos;
@@ -46,6 +51,9 @@ typedef struct		s_line
 	t_vec2d		end;
 	t_frgba		col;
 	t_bool		side;
+	t_bool		texture;
+	t_bool		shadow;
+	int		texture_number;
 }			t_line;
 
 typedef struct		s_map
@@ -75,7 +83,8 @@ typedef struct		s_env
 	t_map		map;
 	t_ray		ray;
 	t_line		line;
-	int8_t		event;
+	t_hard_texture	texture;
+	char		event;
 }			t_env;
 
 /*
