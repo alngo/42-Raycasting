@@ -13,7 +13,6 @@ static void		line_init_calc(t_ray *ray, t_line *line, int x)
 	line->end.x = x;
 	line->side = ray->side;
 	line->texture = false;
-	line->shadow = false;
 }
 
 static void		line_set_basic_color(t_line *line, int block)
@@ -42,8 +41,6 @@ static void		line_get_type(t_map *map, t_line *line, int *mapx, int *mapy)
 		line->texture_number = block - 5;
 		line->texture = true;
 	}
-	if (line->side)
-		line->shadow = true;
 }
 
 void			line_cast(t_env *e, int *mapx, int *mapy, int x)

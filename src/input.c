@@ -1,21 +1,5 @@
 #include "wolf3d.h"
 
-int		key_hook(int key, t_env *e)
-{
-	if (key == ECHAP_KEY)
-		checkout(e, "Bye bye !");
-	else if (key == W_KEY || key == S_KEY)
-		move(e, key);
-	else if (key == A_KEY || key == D_KEY)
-		strafe(e, key);
-	else if (key == RIGHT_KEY || key == LEFT_KEY)
-		rotate(e, key);
-	else
-		ft_printf("Pressed : [%d]\n", key);
-	render(e);
-	return (0);
-}
-
 int		key_pressed(int key, t_env *e)
 {
 	if (key == ECHAP_KEY)

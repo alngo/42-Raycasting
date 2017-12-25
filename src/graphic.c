@@ -42,7 +42,7 @@ void			line_basic_draw(t_env *e, t_line *line)
 	
 	x = line->start.x;
 	y = line->start.y;
-	col = line->shadow ? shadow(line->col) : line->col;
+	col = line->side ? shadow(line->col) : line->col;
 	while (y < line->end.y)
 	{
 		img_pixel_put(e, x, y, col);
@@ -56,7 +56,7 @@ void			line_textu_draw(t_env *e, t_line *line)
 	int		textu_x;
 	int		textu_y;
 	int		d;
-	t_frgba		pix_col;
+	int		pix_col;
 	int		y;
 	int		x;
 
@@ -76,12 +76,12 @@ void			line_textu_draw(t_env *e, t_line *line)
 	{
 		d = y * 256 - HEIGHT * 128 + line->height * 128;
 		textu_y = ((d * TEXTURE_HEIGHT) / line->height) / 256;
-		pix_col = ft_inttofrgba(
+		pix_col = 
 		e->texture.texture[line->texture_number][TEXTURE_WIDTH *
-		textu_y + textu_x] << 8);
-		if (line->shadow)
-			pix_col = shadow(pix_col);
-		img_pixel_put(e, x, y, pix_col);
+		textu_y + textu_x];
+		if (line->side)
+			pix_col = (pix_col >> 1) & 8355711;
+		img_pixel_put(e, x, y, ft_inttofrgba(pix_col << 8));
 		y++;
 	}
 }

@@ -52,7 +52,6 @@ typedef struct		s_line
 	t_frgba		col;
 	t_bool		side;
 	t_bool		texture;
-	t_bool		shadow;
 	int		texture_number;
 	int		height;
 }			t_line;
@@ -138,7 +137,6 @@ t_frgba			shadow(t_frgba col);
 /*
 ** ===================== INPUT.C =============================
 */
-int			key_hook(int key, t_env *e);
 int			key_pressed(int key, t_env *e);
 int			key_released(int key, t_env *e);
 int			key_loop(t_env *e);
