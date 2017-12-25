@@ -14,7 +14,7 @@
 # define MOVE_FORWARD	0b00000001
 # define MOVE_BACKWARD 	0b00000010
 # define STRAFE_LEFT 	0b00000100
-# define STRAFE_RIGHT 	0b00001000
+# define STRAFE_RIGHT 	0b00001000 
 # define ROTATE_RIGHT 	0b00010000
 # define ROTATE_LEFT 	0b00100000
 
@@ -54,6 +54,7 @@ typedef struct		s_line
 	t_bool		texture;
 	t_bool		shadow;
 	int		texture_number;
+	int		height;
 }			t_line;
 
 typedef struct		s_map
@@ -131,7 +132,8 @@ void			line_cast(t_env *e, int *mapx, int *mapy, int x);
 */
 void			img_pixel_put(t_env *e, int x, int y, t_frgba c);
 void			img_fill(t_env *e, t_frgba c);
-void			line_draw(t_env *e, t_line *line);
+void			line_basic_draw(t_env *e, t_line *line);
+void			line_textu_draw(t_env *e, t_line *line);
 t_frgba			shadow(t_frgba col);
 /*
 ** ===================== INPUT.C =============================

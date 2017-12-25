@@ -34,7 +34,7 @@ t_frgba			shadow(t_frgba col)
 	return (ret);
 }
 
-void			line_draw(t_env *e, t_line *line)
+void			line_basic_draw(t_env *e, t_line *line)
 {
 	int		x;
 	int		y;
@@ -46,6 +46,42 @@ void			line_draw(t_env *e, t_line *line)
 	while (y < line->end.y)
 	{
 		img_pixel_put(e, x, y, col);
+		y++;
+	}
+}
+
+void			line_textu_draw(t_env *e, t_line *line)
+{
+	double		wall_x;
+	int		textu_x;
+	int		textu_y;
+	int		d;
+	t_frgba		pix_col;
+	int		y;
+	int		x;
+
+	if (e->line.side)
+		wall_x = e->ray.pos.x + e->ray.wall * e->ray.dir.x;
+	else
+		wall_x = e->ray.pos.y + e->ray.wall * e->ray.dir.y;
+	wall_x -= (int)wall_x;
+	textu_x = (int)(wall_x * TEXTURE_WIDTH);
+	if (!line->side && e->ray.dir.x > 0)
+		textu_x = TEXTURE_WIDTH - textu_x - 1;
+	if (line->side && e->ray.dir.y < 0)
+		textu_x = TEXTURE_WIDTH - textu_x - 1;
+	x = line->start.x;
+	y = line->start.y;
+	while (y < line->end.y)
+	{
+		d = y * 256 - HEIGHT * 128 + line->height * 128;
+		textu_y = ((d * TEXTURE_HEIGHT) / line->height) / 256;
+		pix_col = ft_inttofrgba(
+		e->texture.texture[line->texture_number][TEXTURE_WIDTH *
+		textu_y + textu_x] << 8);
+		if (line->shadow)
+			pix_col = shadow(pix_col);
+		img_pixel_put(e, x, y, pix_col);
 		y++;
 	}
 }

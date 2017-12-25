@@ -24,7 +24,7 @@ void			show_block(int *arr, int w, size_t len)
 	{
 		if (!(i % w) && i)
 			ft_printf("\n");
-		ft_printf("[%d]", arr[i]);
+		ft_printf("[%2d]", arr[i]);
 		i++;
 	}
 	ft_printf("\n");
