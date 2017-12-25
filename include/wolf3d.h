@@ -67,14 +67,24 @@ typedef struct		s_env
 }			t_env;
 
 /*
-**	=== main.c ===
+** === main.c ===
 */
 void			render(t_env *e);
+/*
+** === ray.c ===
+*/
+void			ray_cast(t_env *e, int *mapx, int *mapy, int x);
+/*
+** === line.c ===
+*/
+void			line_compute(t_env *e, int *mapx, int *mapy, int x);
 /*
 ** === graphic.c ===
 */
 void			img_pixel_put(t_env *e, int x, int y, t_frgba c);
 void			img_fill(t_env *e, t_frgba c);
+void			line_draw(t_env *e, t_line *line);
+t_frgba			shadow(t_frgba col);
 /*
 ** === input.c ===
 */
@@ -89,7 +99,6 @@ void			show_map_block(t_map *map);
 ** === init.c ===
 */
 void			init_env(t_env *e, const char *file);
-void			init_null_secure(t_env *e);
 /*
 ** === init_map_info.c ===
 */

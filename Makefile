@@ -22,6 +22,8 @@ SRC_NAME =	main.c\
 		input.c\
 		graphic.c\
 		utils.c\
+		ray.c\
+		line.c\
 		init/init.c\
 		init/init_map_info.c\
 		init/init_map_block.c\
@@ -40,7 +42,7 @@ FRAMEWORK = -framework OpenGL -framework AppKit
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -g
+CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

@@ -1,78 +1,97 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   input.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/27 19:07:18 by alngo             #+#    #+#             */
-/*   Updated: 2017/11/29 21:43:49 by alngo            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "wolf3d.h"
 
-void		move(t_env *e, int key)
+static void	move(t_env *e, int key)
 {
-	t_map	map;
-	t_cam	cam;
-	double	moveSpeed = 0.5;
+	t_vec2d	new_pos;
 
-	map = e->map;
-	cam = e->cam;
+	printf("x[%f] y[%f]\n", e->cam.pos.x, e->cam.pos.y);
 	if (key == W_KEY)
 	{
-		if(map.block[(int)(cam.pos.y * map.w + cam.pos.x + cam.dir.x * moveSpeed)] == 0)
-			e->cam.pos.x = cam.pos.x + cam.dir.x * moveSpeed;
-		if(map.block[(int)((cam.pos.y + cam.dir.y * moveSpeed) * map.w + cam.pos.x)] == 0)
-			e->cam.pos.y = cam.pos.y + cam.dir.y * moveSpeed;
+		new_pos.x = e->cam.pos.x + e->cam.dir.x * 0.2;
+		new_pos.y = e->cam.pos.y + e->cam.dir.y * 0.2;
 	}
-	if (key == S_KEY)
+	else if (key == S_KEY)
 	{
-		if(map.block[(int)(cam.pos.y * map.w + cam.pos.x - cam.dir.x * moveSpeed)] == 0)
-			e->cam.pos.x = cam.pos.x - cam.dir.x * moveSpeed;
-		if(map.block[(int)((cam.pos.y - cam.dir.y * moveSpeed) * map.w + cam.pos.x)] == 0)
-			e->cam.pos.y = cam.pos.y - cam.dir.y * moveSpeed;
+		new_pos.x = e->cam.pos.x - e->cam.dir.x * 0.2;
+		new_pos.y = e->cam.pos.y - e->cam.dir.y * 0.2;
 	}
-	render(e);
+	if (new_pos.y * e->map.w + new_pos.x < e->map.max)
+	{
+		if (e->map.block[(int)((int)new_pos.y * e->map.w + (int)new_pos.x)] == 0)
+		{
+			e->cam.pos.x = new_pos.x;
+			e->cam.pos.y = new_pos.y;
+		}
+	}
 }
 
-void		rotate(t_env *e, int key)
+static void	strafe(t_env *e, int key)
+{
+	double	rot;
+	t_vec2d	tmp;
+	t_vec2d	new_pos;
+
+	rot = M_PI / 2;
+	tmp.x = e->cam.dir.x * cos(-rot) - e->cam.dir.y * sin(-rot);
+	tmp.y = e->cam.dir.x * sin(-rot) + e->cam.dir.y * cos(-rot);
+	if (key == D_KEY)
+	{
+		new_pos.x = e->cam.pos.x + tmp.x * 0.1;
+		new_pos.y = e->cam.pos.y + tmp.y * 0.1;
+	}
+	else if (key == A_KEY)
+	{
+		new_pos.x = e->cam.pos.x - tmp.x * 0.1;
+		new_pos.y = e->cam.pos.y - tmp.y * 0.1;
+	}
+	if (new_pos.y * e->map.w + new_pos.x < e->map.max)
+	{
+		if (e->map.block[(int)((int)new_pos.y * e->map.w + (int)new_pos.x)] == 0)
+		{
+			e->cam.pos.x = new_pos.x;
+			e->cam.pos.y = new_pos.y;
+		}
+	}
+}
+
+static void	rotate(t_env *e, int key)
 {
 	t_cam	cam;
 	double	olddirx;
 	double	oldplanex;
-	double	rotSpeed = M_PI / 8;
+	double	rotSpeed = M_PI / 50;
 
 	cam = e->cam;
 	olddirx = cam.dir.x;
 	oldplanex = cam.plane.x;
-	if (key == D_KEY)
+	if (key == RIGHT_KEY)
 	{
 		e->cam.dir.x = cam.dir.x * cos(-rotSpeed) - cam.dir.y * sin(-rotSpeed);
 		e->cam.dir.y = olddirx * sin(-rotSpeed) + cam.dir.y * cos(-rotSpeed);
 		e->cam.plane.x = cam.plane.x * cos(-rotSpeed) - cam.plane.y * sin(-rotSpeed);
 		e->cam.plane.y = oldplanex * sin(-rotSpeed) + cam.plane.y * cos(-rotSpeed);
 	}
-	if (key == A_KEY)
+	else if (key == LEFT_KEY)
 	{
 		e->cam.dir.x = cam.dir.x * cos(rotSpeed) - cam.dir.y * sin(rotSpeed);
 		e->cam.dir.y = olddirx * sin(rotSpeed) + cam.dir.y * cos(rotSpeed);
 		e->cam.plane.x = cam.plane.x * cos(rotSpeed) - cam.plane.y * sin(rotSpeed);
 		e->cam.plane.y = oldplanex * sin(rotSpeed) + cam.plane.y * cos(rotSpeed);
 	}
-	render(e);
 }
 
-int				key_pressed(int key, t_env *e)
+int		key_pressed(int key, t_env *e)
 {
 	if (key == ECHAP_KEY)
 		checkout(e, "Bye bye !");
 	else if (key == W_KEY || key == S_KEY)
 		move(e, key);
 	else if (key == A_KEY || key == D_KEY)
+		strafe(e, key);
+	else if (key == RIGHT_KEY || key == LEFT_KEY)
 		rotate(e, key);
 	else
 		ft_printf("[%d]\n", key);
+	render(e);
 	return (0);
 }

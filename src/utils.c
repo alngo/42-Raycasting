@@ -1,19 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/27 19:07:26 by alngo             #+#    #+#             */
-/*   Updated: 2017/11/29 22:37:17 by alngo            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "wolf3d.h"
 
 void			checkout(t_env *e, char *s)
 {
+	if (s)
+		ft_putendl(s);
 	if (e->mlx.img)
 		mlx_destroy_image(e->mlx.mlx, e->mlx.img);
 	if (e->mlx.win)
@@ -22,8 +12,6 @@ void			checkout(t_env *e, char *s)
 		free(e->map.name);
 	if (e->map.block)
 		free(e->map.block);
-	if (s)
-		ft_putendl(s);
 	exit(0);
 }
 

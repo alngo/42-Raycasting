@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   graphic.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/27 19:07:22 by alngo             #+#    #+#             */
-/*   Updated: 2017/12/01 18:51:40 by alngo            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "wolf3d.h"
 
 void			img_pixel_put(t_env *e, int x, int y, t_frgba c)
@@ -32,6 +20,31 @@ void			img_pixel_put(t_env *e, int x, int y, t_frgba c)
 		mlx.adr[i + 1] = c.g;
 		mlx.adr[i + 2] = c.r;
 		mlx.adr[i + 3] = c.a;
+	}
+}
+
+t_frgba			shadow(t_frgba col)
+{
+	t_frgba		ret;
+	
+	ret.r = col.r / 2;
+	ret.g = col.g / 2;
+	ret.b = col.b / 2;
+	ret.a = col.a;
+	return (ret);
+}
+
+void			line_draw(t_env *e, t_line *line)
+{
+	int		x;
+	int		y;
+	
+	x = line->start.x;
+	y = line->start.y;
+	while (y < line->end.y)
+	{
+		img_pixel_put(e, x, y, line->col);
+		y++;
 	}
 }
 
