@@ -10,7 +10,7 @@ void			render(t_env *e)
 	while (x < WIDTH)
 	{
 		ray_cast(e, &mapx, &mapy, x);
-		line_compute(e, &mapx, &mapy, x);
+		line_cast(e, &mapx, &mapy, x);
 		x++;
 	}
 	mlx_put_image_to_window(e->mlx.mlx, e->mlx.win, e->mlx.img, 0, 0);
@@ -24,7 +24,9 @@ int			main(int ac, char **av)
 
 	init_env(&e, av[1]);
 	render(&e);
-	mlx_hook(e.mlx.win, 2, 0, key_pressed, &e);
+	mlx_hook(e.mlx.win, 2, 0, &key_pressed, &e);
+	mlx_hook(e.mlx.win, 3, 0, &key_released, &e);
+	mlx_loop_hook(e.mlx.mlx, &key_loop, &e);
 	mlx_loop(e.mlx.mlx);
 	return (0);
 }

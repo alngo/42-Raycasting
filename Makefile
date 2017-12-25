@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: eabgrall <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/10/12 15:27:07 by eabgrall          #+#    #+#              #
-#    Updated: 2017/11/29 21:48:46 by alngo            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME = wolf3d
 
 SRC_PATH = src
@@ -24,9 +12,10 @@ SRC_NAME =	main.c\
 		utils.c\
 		ray.c\
 		line.c\
+		movement.c\
 		init/init.c\
-		init/init_map_info.c\
-		init/init_map_block.c\
+		init/get_map_info.c\
+		init/get_map_block.c\
 
 OBJ_PATH = obj
 
@@ -42,7 +31,7 @@ FRAMEWORK = -framework OpenGL -framework AppKit
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
+CFLAGS = -Werror -Wextra -Wall -g
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

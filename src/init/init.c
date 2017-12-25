@@ -14,6 +14,7 @@
 
 static void		init_null_secure(t_env *e)
 {
+	e->event = 0;
 	e->mlx.win = NULL;
 	e->mlx.img = NULL;
 	e->mlx.adr = NULL;
@@ -64,9 +65,9 @@ void			init_env(t_env *e, const char *file)
 {
 	char		*name;
 
-	name = e->map.name ? e->map.name : "Noname";
 	init_null_secure(e);
 	init_map(e, file);
+	name = e->map.name ? e->map.name : "Noname";
 	init_cam(e, &e->cam, &(e->map));
 	if (!(e->mlx.mlx = mlx_init()))
 		checkout(e, "Error: mlx_init().");

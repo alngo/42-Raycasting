@@ -35,7 +35,7 @@ static void		line_get_color(t_map *map, t_line *line, int *mapx, int *mapy)
 		line->col = shadow(line->col);
 }
 
-void			line_compute(t_env *e, int *mapx, int *mapy, int x)
+void			line_cast(t_env *e, int *mapx, int *mapy, int x)
 {
 	line_init_calc(&e->ray, &e->line, x);
 	line_get_color(&e->map, &e->line, mapx, mapy);

@@ -10,6 +10,14 @@
 # define WIDTH 	900
 # define HEIGHT 600
 
+# define SPEED		0.1
+# define MOVE_FORWARD	0b00000001
+# define MOVE_BACKWARD 	0b00000010
+# define STRAFE_LEFT 	0b00000100
+# define STRAFE_RIGHT 	0b00001000
+# define ROTATE_RIGHT 	0b00010000
+# define ROTATE_LEFT 	0b00100000
+
 typedef struct		s_cam
 {
 	t_vec2d		pos;
@@ -64,47 +72,72 @@ typedef struct		s_env
 	t_map		map;
 	t_ray		ray;
 	t_line		line;
+	int8_t		event;
 }			t_env;
 
 /*
-** === main.c ===
+** ===================== MAIN.C ==============================
 */
 void			render(t_env *e);
 /*
-** === ray.c ===
+** ===================== RAY.C ===============================
+** ray_init_calc
+** ray_step_calc
+** ray_cast_dda
+** ray_wall_calc
 */
 void			ray_cast(t_env *e, int *mapx, int *mapy, int x);
 /*
-** === line.c ===
+** ===================== LINE.C ==============================
+** ray_init_calc
+** line_get_color
+** line_draw
 */
-void			line_compute(t_env *e, int *mapx, int *mapy, int x);
+void			line_cast(t_env *e, int *mapx, int *mapy, int x);
 /*
-** === graphic.c ===
+** ===================== GRAPHIC.C ===========================
 */
 void			img_pixel_put(t_env *e, int x, int y, t_frgba c);
 void			img_fill(t_env *e, t_frgba c);
 void			line_draw(t_env *e, t_line *line);
 t_frgba			shadow(t_frgba col);
 /*
-** === input.c ===
+** ===================== INPUT.C =============================
 */
+int			key_hook(int key, t_env *e);
 int			key_pressed(int key, t_env *e);
+int			key_released(int key, t_env *e);
+int			key_loop(t_env *e);
 /*
-** === utils.c ===
+** ===================== MOVEMENT.C ==========================
+*/
+void			move(t_env *e, int key);
+void			strafe(t_env *e, int key);
+void			rotate(t_env *e, int key);
+/*
+** ===================== UTILS.C ==========================
 */
 void			checkout(t_env *e, char *s);
 void			hello_world(t_env *e);
 void			show_map_block(t_map *map);
 /*
-** === init.c ===
+** ===================== INIT.C =-=========================
+** init_null_secure
+** init_map
+** init_cam
 */
 void			init_env(t_env *e, const char *file);
 /*
-** === init_map_info.c ===
+** ===================== GET_MAP_INFO.C ===================
+** stock_map_info
+** stock_map_name
 */
 int			get_map_info(t_env *e, const int fd);
 /*
-** === init_map_block.c ===
+** ===================== GET_MAP_BLOCK.C ==================
+** check_map_block
+** stock_map_block
+** check_map_block
 */
 int			get_map_block(t_env *e, const int fd);
 

@@ -22,7 +22,7 @@ static int		stock_map_block(t_env *e, char **data)
 		data++;
 		index++;
 	}
-	return (1);
+	return (index);
 }
 
 int			get_map_block(t_env *e, const int fd)
