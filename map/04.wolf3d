@@ -1,19 +1,21 @@
 #name:		10 x 10
 #width:		10
 #height:	10
-#Texture:
-0	barrel.png
-1	bluestone.png
-2	colorstone.png
-3	eagle.png
-4	greenlight.png
-5	greystone.png
-6	mossy.png
-7	pillar.png
-8	purplestone.png
-9	redbrick.png
-10	wolftextures.png
-11	wood.png
+#texture:
+#texture_dir:	./textures/
+#tex_num	12
+0		barrel.png
+1		bluestone.png
+2		colorstone.png
+3		eagle.png
+4		greenlight.png
+5		greystone.png
+6		mossy.png
+7		pillar.png
+8		purplestone.png
+9		redbrick.png
+10		wolftextures.png
+11		wood.png
 ===
 1 1 1 1 1 1 1 1 1 1
 1 0 0 2 0 3 0 0 0 1

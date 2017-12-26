@@ -21,10 +21,12 @@
 # define TEXTURE_WIDTH	64
 # define TEXTURE_HEIGHT	64
 
-typedef struct		s_hard_texture
+typedef struct		s_texture
 {
-	int		texture[8][TEXTURE_WIDTH * TEXTURE_HEIGHT];
-}			t_hard_texture;
+	int		len;
+	int		*tex_nu;
+	int		**texture;
+}			t_texture;
 
 typedef struct		s_cam
 {
@@ -51,8 +53,7 @@ typedef struct		s_line
 	t_vec2d		end;
 	t_frgba		col;
 	t_bool		side;
-	t_bool		texture;
-	int		texture_number;
+	int		tex_nu;
 	int		height;
 }			t_line;
 
@@ -83,7 +84,8 @@ typedef struct		s_env
 	t_map		map;
 	t_ray		ray;
 	t_line		line;
-	t_hard_texture	texture;
+	t_texture	tex;
+	t_bool		texture;
 	char		event;
 }			t_env;
 
@@ -92,20 +94,20 @@ typedef struct		s_env
 */
 void			render(t_env *e);
 /*
-** ===================== INIT.C =-=========================
+** ===================== INIT.C =-============================
 ** init_null_secure
 ** init_map
 ** init_cam
 */
 void			init_env(t_env *e, const char *file);
 /*
-** ===================== GET_MAP_INFO.C ===================
+** ===================== GET_MAP_INFO.C ======================
 ** stock_map_info
 ** stock_map_name
 */
 int			get_map_info(t_env *e, const int fd);
 /*
-** ===================== GET_MAP_BLOCK.C ==================
+** ===================== GET_MAP_BLOCK.C =====================
 ** check_map_block
 ** stock_map_block
 ** check_map_block
@@ -121,19 +123,24 @@ int			get_map_block(t_env *e, const int fd);
 void			ray_cast(t_env *e, int *mapx, int *mapy, int x);
 /*
 ** ===================== LINE.C ==============================
-** ray_init_calc
-** line_get_color
-** line_draw
+** line_init_calc
+** line_set_basic_color
+** line_set_text_num
+** line_get_type
 */
 void			line_cast(t_env *e, int *mapx, int *mapy, int x);
+/*
+** ===================== LINE_DRAW.C =========================
+** shadow
+*/
+void			line_basic_draw(t_env *e, t_line *line);
+void			line_textu_draw(t_env *e, t_line *line);
 /*
 ** ===================== GRAPHIC.C ===========================
 */
 void			img_pixel_put(t_env *e, int x, int y, t_frgba c);
 void			img_fill(t_env *e, t_frgba c);
-void			line_basic_draw(t_env *e, t_line *line);
-void			line_textu_draw(t_env *e, t_line *line);
-t_frgba			shadow(t_frgba col);
+void			hello_world(t_env *e);
 /*
 ** ===================== INPUT.C =============================
 */
@@ -147,11 +154,9 @@ void			move(t_env *e, int key);
 void			strafe(t_env *e, int key);
 void			rotate(t_env *e, int key);
 /*
-** ===================== UTILS.C ==========================
+** ===================== UTILS.C =============================
 */
 void			checkout(t_env *e, char *s);
-void			hello_world(t_env *e);
 void			show_block(int *arr, int w, size_t len);
-
 
 #endif

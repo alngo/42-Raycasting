@@ -12,7 +12,6 @@ static void		line_init_calc(t_ray *ray, t_line *line, int x)
 	line->start.x = x;
 	line->end.x = x;
 	line->side = ray->side;
-	line->texture = false;
 }
 
 static void		line_set_basic_color(t_line *line, int block)
@@ -29,25 +28,36 @@ static void		line_set_basic_color(t_line *line, int block)
 		line->col = ft_frgba(50, 50, 50, 0);
 }
 
-static void		line_get_type(t_map *map, t_line *line, int *mapx, int *mapy)
+static void		line_set_text_num(t_env *e, t_line *line, int block)
+{
+	int		i;
+
+	i = 0;
+	while (i < e->tex.len)
+	{
+		if (block == e->tex.tex_nu[i])
+			break;
+		i++;
+	}
+	line->tex_nu = i;
+}
+
+static void		line_get_type(t_env *e, t_line *line, int *mapx, int *mapy)
 {
 	int		block;
 
-	block = map->block[*mapy * map->w + *mapx];
-	if ((block >= 1 && block <= 4) || block > 12)
+	block = e->map.block[*mapy * e->map.w + *mapx];
+	if (!e->texture)
 		line_set_basic_color(line, block);
 	else
-	{
-		line->texture_number = block - 5;
-		line->texture = true;
-	}
+		line_set_text_num(e, line, block);
 }
 
 void			line_cast(t_env *e, int *mapx, int *mapy, int x)
 {
 	line_init_calc(&e->ray, &e->line, x);
-	line_get_type(&e->map, &e->line, mapx, mapy);
-	if (e->line.texture == false)
+	line_get_type(e, &e->line, mapx, mapy);
+	if (!e->texture)
 		line_basic_draw(e, &e->line);
 	else
 		line_textu_draw(e, &e->line);

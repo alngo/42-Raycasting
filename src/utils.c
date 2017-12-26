@@ -30,30 +30,3 @@ void			show_block(int *arr, int w, size_t len)
 	ft_printf("\n");
 }
 
-void			hello_world(t_env *e)
-{
-	int		i;
-	int		j;
-	t_frgba		col;
-	t_frgba		tmp;
-
-	j = HEIGHT - 1;
-	tmp.a = 0;
-	while (j >= 0)
-	{
-		i = WIDTH -1;
-		while (i >= 0)
-		{
-			col.r = (float)i / (float)WIDTH;
-			col.g = (float)j / (float)HEIGHT;
-			col.b = 0.2;
-			tmp.r = col.r * 255.99;
-			tmp.g = col.g * 255.99;
-			tmp.b = col.b * 255.99;
-			img_pixel_put(e, i, j, tmp);	
-			i--;
-		}
-		j--;
-	}
-	mlx_put_image_to_window(e->mlx.mlx, e->mlx.win, e->mlx.img, 0, 0);
-}

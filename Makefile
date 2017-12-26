@@ -7,19 +7,20 @@ LIBFT = ./libft/libft.a
 LIBMLX = ./mlx/libmlx.a
 
 SRC_NAME =	main.c\
-		input.c\
-		graphic.c\
 		utils.c\
 		ray.c\
 		line.c\
+		line_draw.c\
 		movement.c\
-		init/init.c\
-		init/get_map_info.c\
+		engine/graphic.c\
+		engine/input.c\
 		init/get_map_block.c\
+		init/get_map_info.c\
+		init/init.c\
 
 OBJ_PATH = obj
 
-SUB_PATH = /{init,}
+SUB_PATH = /{init,engine}
 
 INCLUDE_PATH = -I include
 
