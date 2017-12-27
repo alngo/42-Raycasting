@@ -33,9 +33,9 @@ static void		line_set_text_num(t_env *e, t_line *line, int block)
 	int		i;
 
 	i = 0;
-	while (i < e->tex.len)
+	while (i < e->map.tex.len)
 	{
-		if (block == e->tex.number[i])
+		if (block == e->map.tex.number[i])
 			break;
 		i++;
 	}
@@ -47,7 +47,7 @@ static void		line_get_type(t_env *e, t_line *line, int *mapx, int *mapy)
 	int		block;
 
 	block = e->map.block[*mapy * e->map.w + *mapx];
-	if (!e->texture)
+	if (!e->map.texture)
 		line_set_basic_color(line, block);
 	else
 		line_set_text_num(e, line, block);
@@ -57,7 +57,7 @@ void			line_cast(t_env *e, int *mapx, int *mapy, int x)
 {
 	line_init_calc(&e->ray, &e->line, x);
 	line_get_type(e, &e->line, mapx, mapy);
-	if (!e->texture)
+	if (!e->map.texture)
 		line_basic_draw(e, &e->line);
 	else
 		line_textu_draw(e, &e->line);

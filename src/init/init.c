@@ -15,14 +15,14 @@
 static void		init_null_secure(t_env *e)
 {
 	e->event = 0;
-	e->texture = 0;
 	e->mlx.win = NULL;
 	e->mlx.img = NULL;
 	e->mlx.adr = NULL;
-	e->tex.number = NULL;
-	e->tex.texture = NULL;
-	e->tex.dir = NULL;
-	e->tex.len = 0;
+	e->map.texture = 0;
+	e->map.tex.len = 0;
+	e->map.tex.number = NULL;
+	e->map.tex.texture = NULL;
+	e->map.tex.dir = NULL;
 	e->map.block = NULL;
 	e->map.name = NULL;
 	e->map.w = 0;
@@ -38,7 +38,7 @@ static	void		init_map(t_env *e, const char *file)
 	if ((fd = open(file, O_RDONLY)) == -1)
 		checkout(e, strerror(errno));
 	if (!(ret = get_map_info(e, fd)))
-		checkout(e, "get_map_info() error..");
+		checkout(e, "get_map_info() error.");
 	if (ret == 1)
 	{
 		if(!(ret = get_map_texture(e, fd)))
@@ -97,5 +97,6 @@ void			init_env(t_env *e, const char *file)
 	ft_printf("Init done !\nMap:\n");
 	show_block(e->map.block, e->map.w, e->map.max);
 	ft_printf("Camera position:\n[%d][%d]\n", (int)e->cam.pos.x, (int)e->cam.pos.y);
+	ft_printf("In [%s] [%d]\n", e->map.tex.dir, e->map.tex.len);
 }
 

@@ -65,6 +65,8 @@ typedef struct		s_map
 	int		*block;
 	int		max;
 	char		*name;
+	t_texture	tex;
+	t_bool		texture;
 }			t_map;
 
 typedef struct		s_mlx
@@ -85,8 +87,6 @@ typedef struct		s_env
 	t_map		map;
 	t_ray		ray;
 	t_line		line;
-	t_texture	tex;
-	t_bool		texture;
 	char		event;
 }			t_env;
 

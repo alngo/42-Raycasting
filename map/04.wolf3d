@@ -1,9 +1,10 @@
 #name:		10 x 10
 #width:		10
 #height:	10
-#tex_num	12
-#texture_dir:	./textures/
 #texture:
+#texture_num:	12
+#texture_dir:	./textures/
+#list:
 0		barrel.png
 1		bluestone.png
 2		colorstone.png

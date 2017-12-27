@@ -1,6 +1,6 @@
 #include "wolf3d.h"
 
-static char		*stock_map_name(char *name)
+static char		*stock_map_name(const char *name)
 {
 	int		i;
 
@@ -9,14 +9,14 @@ static char		*stock_map_name(char *name)
 		i++;
 	if (!name[i])
 		return (NULL);
-	return (ft_strdup(&name[i]));
+	return (ft_strdup((char *)&name[i]));
 }
 
 static int		stock_map_info(t_env *e, const char *line)
 {
 	if (ft_strstr(line, "#name:"))
 	{
-		if (!(e->map.name = stock_map_name((char *)&line[6])))
+		if (!(e->map.name = stock_map_name(&line[6])))
 			return (-1);
 	}
 	else if (ft_strstr(line, "#width:"))
@@ -29,11 +29,11 @@ static int		stock_map_info(t_env *e, const char *line)
 		if (!(e->map.h = ft_atoi(&line[8])))
 			return (-1);
 	}
-	else if (ft_strstr(line, "#texture"))
+	else if (ft_strstr(line, "#texture:"))
 		return (1);
 	else if (ft_strstr(line, "==="))
 		return (2);
-	return (0);
+	return (-1);
 }
 
 int			get_map_info(t_env *e, const int fd)
