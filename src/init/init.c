@@ -21,7 +21,7 @@ static void		init_null_secure(t_env *e)
 	e->map.texture = 0;
 	e->map.tex.len = 0;
 	e->map.tex.number = NULL;
-	e->map.tex.texture = NULL;
+	e->map.tex.tex = NULL;
 	e->map.tex.dir = NULL;
 	e->map.block = NULL;
 	e->map.name = NULL;

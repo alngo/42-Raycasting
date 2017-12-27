@@ -26,7 +26,7 @@ typedef struct		s_texture
 	char		*dir;
 	int		len;
 	int		*number;
-	int		**texture;
+	int		**tex;
 }			t_texture;
 
 typedef struct		s_cam

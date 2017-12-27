@@ -33,7 +33,7 @@ static int		stock_map_info(t_env *e, const char *line)
 		return (1);
 	else if (ft_strstr(line, "==="))
 		return (2);
-	return (-1);
+	return (0);
 }
 
 int			get_map_info(t_env *e, const int fd)

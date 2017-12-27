@@ -5,18 +5,18 @@
 #texture_num:	12
 #texture_dir:	./textures/
 #list:
-0		barrel.png
-1		bluestone.png
-2		colorstone.png
-3		eagle.png
-4		greenlight.png
-5		greystone.png
-6		mossy.png
-7		pillar.png
-8		purplestone.png
-9		redbrick.png
-10		wolftextures.png
-11		wood.png
+0	barrel.png
+1	bluestone.png
+2	colorstone.png
+3	eagle.png
+4	greenlight.png
+5	greystone.png
+6	mossy.png
+7	pillar.png
+8	purplestone.png
+9	redbrick.png
+10	wolftextures.png
+11	wood.png
 ===
 1 1 1 1 1 1 1 1 1 1
 1 0 0 2 0 3 0 0 0 1
