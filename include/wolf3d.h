@@ -23,8 +23,9 @@
 
 typedef struct		s_texture
 {
+	char		*dir;
 	int		len;
-	int		*tex_nu;
+	int		*number;
 	int		**texture;
 }			t_texture;
 
@@ -106,6 +107,10 @@ void			init_env(t_env *e, const char *file);
 ** stock_map_name
 */
 int			get_map_info(t_env *e, const int fd);
+/*
+** ===================== GET_MAP_TEXTURE.C ===================
+*/
+int			get_map_texture(t_env *e, const int fd);
 /*
 ** ===================== GET_MAP_BLOCK.C =====================
 ** check_map_block

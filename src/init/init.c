@@ -15,9 +15,14 @@
 static void		init_null_secure(t_env *e)
 {
 	e->event = 0;
+	e->texture = 0;
 	e->mlx.win = NULL;
 	e->mlx.img = NULL;
 	e->mlx.adr = NULL;
+	e->tex.number = NULL;
+	e->tex.texture = NULL;
+	e->tex.dir = NULL;
+	e->tex.len = 0;
 	e->map.block = NULL;
 	e->map.name = NULL;
 	e->map.w = 0;
@@ -28,13 +33,22 @@ static void		init_null_secure(t_env *e)
 static	void		init_map(t_env *e, const char *file)
 {
 	int		fd;
+	int		ret;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
 		checkout(e, strerror(errno));
-	if (!(get_map_info(e, fd)))
+	if (!(ret = get_map_info(e, fd)))
 		checkout(e, "get_map_info() error..");
-	if (!(get_map_block(e, fd)))
-		checkout(e, "get_map_block() error.");
+	if (ret == 1)
+	{
+		if(!(ret = get_map_texture(e, fd)))
+			checkout(e, "get_map_texture() error.");
+	}
+	if (ret == 2)
+	{
+		if (!(get_map_block(e, fd)))
+			checkout(e, "get_map_block() error.");
+	}
 	close(fd);
 }
 
@@ -67,13 +81,15 @@ void			init_env(t_env *e, const char *file)
 
 	init_null_secure(e);
 	init_map(e, file);
-	name = e->map.name ? e->map.name : "Noname";
+	name = e->map.name ? e->map.name : "No name";
 	init_cam(e, &e->cam, &(e->map));
 	if (!(e->mlx.mlx = mlx_init()))
 		checkout(e, "Error: mlx_init().");
-	if (!(e->mlx.win = mlx_new_window(e->mlx.mlx, WIDTH, HEIGHT
-					, name)))
+	if (!(e->mlx.win = mlx_new_window(e->mlx.mlx, WIDTH, HEIGHT, name)))
+	{
+		write(1, "er6", 3); // s'affiche pas
 		checkout(e, "Error: mlx_new_window().");
+	}
 	if (!(e->mlx.img = mlx_new_image(e->mlx.mlx, WIDTH, HEIGHT)))
 		checkout(e, "Error: mlx_new_image().");
 	e->mlx.adr = mlx_get_data_addr(e->mlx.img, &(e->mlx.bpp)

@@ -35,7 +35,7 @@ static void		line_set_text_num(t_env *e, t_line *line, int block)
 	i = 0;
 	while (i < e->tex.len)
 	{
-		if (block == e->tex.tex_nu[i])
+		if (block == e->tex.number[i])
 			break;
 		i++;
 	}

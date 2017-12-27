@@ -5,8 +5,10 @@ static char		*stock_map_name(char *name)
 	int		i;
 
 	i = 0;
-	while (ft_isspace(name[i]))
+	while (ft_isspace(name[i]) && name[i])
 		i++;
+	if (!name[i])
+		return (NULL);
 	return (ft_strdup(&name[i]));
 }
 
@@ -27,9 +29,11 @@ static int		stock_map_info(t_env *e, const char *line)
 		if (!(e->map.h = ft_atoi(&line[8])))
 			return (-1);
 	}
+	else if (ft_strstr(line, "#texture"))
+		return (1);
 	else if (ft_strstr(line, "==="))
-		return (0);
-	return (1);
+		return (2);
+	return (0);
 }
 
 int			get_map_info(t_env *e, const int fd)
@@ -42,11 +46,11 @@ int			get_map_info(t_env *e, const int fd)
 		if ((ret = stock_map_info(e, line)) == -1)
 			return (0);
 		free(line);
-		if (!(ret))
+		if (ret)
 			break;
 	}
 	if (!(e->map.w) || !(e->map.h) || e->map.w > 50 || e->map.h > 50)
 		return (0);
 	e->map.max = e->map.w * e->map.h;
-	return (1);
+	return (ret);
 }

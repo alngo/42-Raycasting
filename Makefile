@@ -16,6 +16,7 @@ SRC_NAME =	main.c\
 		engine/input.c\
 		init/get_map_block.c\
 		init/get_map_info.c\
+		init/get_map_texture.c\
 		init/init.c\
 
 OBJ_PATH = obj
