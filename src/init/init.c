@@ -39,12 +39,12 @@ static	void		init_map(t_env *e, const char *file)
 		checkout(e, strerror(errno));
 	if (!(ret = get_map_info(e, fd)))
 		checkout(e, "get_map_info() error.");
-	if (ret == 1)
+	if (ret == 2)
 	{
 		if(!(ret = get_map_texture(e, fd)))
 			checkout(e, "get_map_texture() error.");
 	}
-	if (ret == 2)
+	if (ret == 1)
 	{
 		if (!(get_map_block(e, fd)))
 			checkout(e, "get_map_block() error.");
@@ -77,26 +77,21 @@ static	void		init_cam(t_env *e, t_cam *cam, t_map *map)
 
 void			init_env(t_env *e, const char *file)
 {
-	char		*name;
-
 	init_null_secure(e);
 	init_map(e, file);
-	name = e->map.name ? e->map.name : "No name";
 	init_cam(e, &e->cam, &(e->map));
 	if (!(e->mlx.mlx = mlx_init()))
 		checkout(e, "Error: mlx_init().");
-	if (!(e->mlx.win = mlx_new_window(e->mlx.mlx, WIDTH, HEIGHT, name)))
-	{
-		write(1, "er6", 3); // s'affiche pas
+	if (!(e->mlx.win = mlx_new_window(e->mlx.mlx, WIDTH, HEIGHT, e->map.name)))
 		checkout(e, "Error: mlx_new_window().");
-	}
 	if (!(e->mlx.img = mlx_new_image(e->mlx.mlx, WIDTH, HEIGHT)))
 		checkout(e, "Error: mlx_new_image().");
 	e->mlx.adr = mlx_get_data_addr(e->mlx.img, &(e->mlx.bpp)
 			, &(e->mlx.sln), &(e->mlx.end));
-	ft_printf("Init done !\nMap:\n");
 	show_block(e->map.block, e->map.w, e->map.max);
 	ft_printf("Camera position:\n[%d][%d]\n", (int)e->cam.pos.x, (int)e->cam.pos.y);
 	ft_printf("In [%s] [%d]\n", e->map.tex.dir, e->map.tex.len);
+	ft_printf("Init done !\n");
+	ft_putmem(e->map.tex.tex[0], 64);
 }
 

@@ -30,9 +30,9 @@ static int		stock_map_info(t_env *e, const char *line)
 			return (-1);
 	}
 	else if (ft_strstr(line, "#texture:"))
-		return (1);
-	else if (ft_strstr(line, "==="))
 		return (2);
+	else if (ft_strstr(line, "==="))
+		return (1);
 	return (0);
 }
 

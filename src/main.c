@@ -23,11 +23,11 @@ int			main(int ac, char **av)
 	t_env		e;
 
 	init_env(&e, av[1]);
-//	render(&e);
+	render(&e);
 	hello_world(&e);
 	mlx_hook(e.mlx.win, 2, 0, &key_pressed, &e);
-//	mlx_hook(e.mlx.win, 3, 0, &key_released, &e);
-//	mlx_loop_hook(e.mlx.mlx, &key_loop, &e);
+	mlx_hook(e.mlx.win, 3, 0, &key_released, &e);
+	mlx_loop_hook(e.mlx.mlx, &key_loop, &e);
 	mlx_loop(e.mlx.mlx);
 	return (0);
 }
