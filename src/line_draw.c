@@ -38,7 +38,9 @@ void			line_textu_draw(t_env *e, t_line *line)
 	t_frgba		pix_col;
 	int		y;
 	int		x;
+	char		*ptr;
 
+	ptr = (char *)e->map.tex.tex[line->tex_nu];
 	if (e->line.side)
 		wall_x = e->ray.pos.x + e->ray.wall * e->ray.dir.x;
 	else
@@ -55,9 +57,8 @@ void			line_textu_draw(t_env *e, t_line *line)
 	{
 		d = y * 256 - HEIGHT * 128 + line->height * 128;
 		textu_y = ((d * TEXTURE_HEIGHT) / line->height) / 256;
-		pix_col = 
-		ft_inttofrgba(e->map.tex.tex[line->tex_nu][TEXTURE_WIDTH *
-		textu_y + textu_x] << 8 );
+//		pix_col = ft_frgba(255, 0 ,0 ,0);	
+pix_col = ft_inttofrgba((ptr[TEXTURE_WIDTH * textu_y + textu_x]));
 		if (line->side)
 			pix_col = shadow(pix_col);
 		img_pixel_put(e, x, y, pix_col);

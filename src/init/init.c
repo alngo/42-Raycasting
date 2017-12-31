@@ -92,6 +92,6 @@ void			init_env(t_env *e, const char *file)
 	ft_printf("Camera position:\n[%d][%d]\n", (int)e->cam.pos.x, (int)e->cam.pos.y);
 	ft_printf("In [%s] [%d]\n", e->map.tex.dir, e->map.tex.len);
 	ft_printf("Init done !\n");
-	ft_putmem(e->map.tex.tex[0], 64);
+//	ft_putmem(e->map.tex.tex[0], 64);
 }
 

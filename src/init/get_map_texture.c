@@ -4,8 +4,8 @@ static int		stock_tex_data(t_env *e, char *line)
 {
 	static int	index;
 	char		*tmp;
-	int		fd;
-	int		ret;
+	int		w;
+	int		h;
 
 	
 	if (index == e->map.tex.len)
@@ -14,15 +14,9 @@ static int		stock_tex_data(t_env *e, char *line)
 	e->map.tex.number[index] = ft_atoi(line);
 	while (ft_isdigit(*line) || ft_isspace(*line))
 		line++;
-	if ((fd = open(tmp = ft_strjoin(e->map.tex.dir, line), O_RDONLY)) == -1)
-		checkout(e, strerror(errno));
-	if (!(e->map.tex.tex[index] = ft_memalloc(sizeof(int) *
-					(TEXTURE_WIDTH * TEXTURE_HEIGHT))))
-		checkout(e, strerror(errno));
-	if ((ret = read(fd, (char *)e->map.tex.tex[index], 64 * 64 * 4)) == -1)
-		checkout(e, strerror(errno));
-	ft_putmem((void *)e->map.tex.tex[index], 64);
-	close(fd);
+	if (!(tmp = ft_strjoin(e->map.tex.dir, line)))
+		return (0);
+	e->map.tex.tex[index] = mlx_xpm_file_to_image(e->mlx.mlx, tmp, &w, &h);
 	free(tmp);
 	index++;
 	return (1);
@@ -100,7 +94,7 @@ int			get_map_texture(t_env *e, const int fd)
 	{
 		if (!(e->map.tex.number = (int *)ft_memalloc(sizeof(int) * e->map.tex.len)))
 			return (0);
-		if (!(e->map.tex.tex = (int **)ft_memalloc(sizeof(int *) * e->map.tex.len)))
+		if (!(e->map.tex.tex = (void **)ft_memalloc(sizeof(void *) * e->map.tex.len)))
 			return (0);
 		if ((ret = get_tex_data(e, fd)) == -1)
 			return (0);
