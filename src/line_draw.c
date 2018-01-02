@@ -29,15 +29,13 @@ void			line_basic_draw(t_env *e, t_line *line)
 
 void			line_textu_draw(t_env *e, t_line *line)
 {
-	(void)e;
-	(void)line;
 	double		wall_x;
-	int		textu_x;
-	int		textu_y;
-	int		d;
+	int			textu_x;
+	int			textu_y;
+	int			d;
 	t_frgba		pix_col;
-	int		y;
-	int		x;
+	int			y;
+	int			x;
 	char		*ptr;
 
 	ptr = (char *)e->map.tex.tex[line->tex_nu];
@@ -57,8 +55,8 @@ void			line_textu_draw(t_env *e, t_line *line)
 	{
 		d = y * 256 - HEIGHT * 128 + line->height * 128;
 		textu_y = ((d * TEXTURE_HEIGHT) / line->height) / 256;
-//		pix_col = ft_frgba(255, 0 ,0 ,0);
-		pix_col = ft_inttofrgba((ptr[TEXTURE_WIDTH * textu_y + textu_x]));
+//		pix_col.r = ptr[0];
+		pix_col = ft_frgba(255,0,0,0);
 		if (line->side)
 			pix_col = shadow(pix_col);
 		img_pixel_put(e, x, y, pix_col);

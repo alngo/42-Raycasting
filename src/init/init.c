@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:06:55 by alngo             #+#    #+#             */
-/*   Updated: 2017/11/29 22:32:02 by alngo            ###   ########.fr       */
+/*   Updated: 2018/01/02 15:38:55 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ static	void		init_cam(t_env *e, t_cam *cam, t_map *map)
 
 void			init_env(t_env *e, const char *file)
 {
+	if (!(e->mlx.mlx = mlx_init()))
+		checkout(e, "Error: mlx_init().");
 	init_null_secure(e);
 	init_map(e, file);
 	init_cam(e, &e->cam, &(e->map));
-	if (!(e->mlx.mlx = mlx_init()))
-		checkout(e, "Error: mlx_init().");
 	if (!(e->mlx.win = mlx_new_window(e->mlx.mlx, WIDTH, HEIGHT, e->map.name)))
 		checkout(e, "Error: mlx_new_window().");
 	if (!(e->mlx.img = mlx_new_image(e->mlx.mlx, WIDTH, HEIGHT)))
@@ -92,6 +92,5 @@ void			init_env(t_env *e, const char *file)
 	ft_printf("Camera position:\n[%d][%d]\n", (int)e->cam.pos.x, (int)e->cam.pos.y);
 	ft_printf("In [%s] [%d]\n", e->map.tex.dir, e->map.tex.len);
 	ft_printf("Init done !\n");
-//	ft_putmem(e->map.tex.tex[0], 64);
 }
 
