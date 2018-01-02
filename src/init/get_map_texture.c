@@ -6,8 +6,9 @@ static int		stock_tex_data(t_env *e, char *line)
 	char		*tmp;
 	int		w;
 	int		h;
+	void		*img;
 
-	
+
 	if (index == e->map.tex.len)
 		return (1);
 	tmp = (char *)line;
@@ -16,7 +17,9 @@ static int		stock_tex_data(t_env *e, char *line)
 		line++;
 	if (!(tmp = ft_strjoin(e->map.tex.dir, line)))
 		return (0);
-	e->map.tex.tex[index] = mlx_xpm_file_to_image(e->mlx.mlx, tmp, &w, &h);
+	printf("%s\n", tmp);
+//	e->map.tex.tex[index] = mlx_xpm_file_to_image(e->mlx.mlx, tmp, &w, &h);
+	img = mlx_xpm_file_to_image(e->mlx.mlx, tmp, &w, &h);
 	free(tmp);
 	index++;
 	return (1);

@@ -33,7 +33,7 @@ FRAMEWORK = -framework OpenGL -framework AppKit
 
 CC = gcc
 
-CFLAGS = -Werror -Wextra -Wall -g
+CFLAGS = -Werror -Wextra -Wall -g -fsanitize=address
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

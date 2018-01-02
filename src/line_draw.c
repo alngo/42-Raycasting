@@ -3,7 +3,7 @@
 static t_frgba		shadow(t_frgba col)
 {
 	t_frgba		ret;
-	
+
 	ret.r = col.r / 2;
 	ret.g = col.g / 2;
 	ret.b = col.b / 2;
@@ -16,7 +16,7 @@ void			line_basic_draw(t_env *e, t_line *line)
 	int		x;
 	int		y;
 	t_frgba		col;
-	
+
 	x = line->start.x;
 	y = line->start.y;
 	col = line->side ? shadow(line->col) : line->col;
@@ -57,8 +57,8 @@ void			line_textu_draw(t_env *e, t_line *line)
 	{
 		d = y * 256 - HEIGHT * 128 + line->height * 128;
 		textu_y = ((d * TEXTURE_HEIGHT) / line->height) / 256;
-//		pix_col = ft_frgba(255, 0 ,0 ,0);	
-pix_col = ft_inttofrgba((ptr[TEXTURE_WIDTH * textu_y + textu_x]));
+//		pix_col = ft_frgba(255, 0 ,0 ,0);
+		pix_col = ft_inttofrgba((ptr[TEXTURE_WIDTH * textu_y + textu_x]));
 		if (line->side)
 			pix_col = shadow(pix_col);
 		img_pixel_put(e, x, y, pix_col);

@@ -14,29 +14,29 @@
 # define MOVE_FORWARD	0b00000001
 # define MOVE_BACKWARD 	0b00000010
 # define STRAFE_LEFT 	0b00000100
-# define STRAFE_RIGHT 	0b00001000 
+# define STRAFE_RIGHT 	0b00001000
 # define ROTATE_RIGHT 	0b00010000
 # define ROTATE_LEFT 	0b00100000
 
 # define TEXTURE_WIDTH	64
 # define TEXTURE_HEIGHT	64
 
-typedef struct		s_texture
+typedef struct	s_texture
 {
 	char		*dir;
-	int		len;
-	int		*number;
+	int			len;
+	int			*number;
 	void		**tex;
-}			t_texture;
+}				t_texture;
 
-typedef struct		s_cam
+typedef struct	s_cam
 {
 	t_vec2d		pos;
 	t_vec2d		dir;
 	t_vec2d		plane;
-}			t_cam;
+}				t_cam;
 
-typedef struct		s_ray
+typedef struct	s_ray
 {
 	t_vec2d		pos;
 	t_vec2d		dir;
@@ -46,41 +46,41 @@ typedef struct		s_ray
 	t_bool		hit;
 	t_bool		side;
 	double		wall;
-}			t_ray;
+}				t_ray;
 
-typedef struct		s_line
+typedef struct	s_line
 {
 	t_vec2d		start;
 	t_vec2d		end;
 	t_frgba		col;
 	t_bool		side;
-	int		tex_nu;
-	int		height;
-}			t_line;
+	int			tex_nu;
+	int			height;
+}				t_line;
 
-typedef struct		s_map
+typedef struct	s_map
 {
-	int		h;
-	int		w;
-	int		*block;
-	int		max;
+	int			h;
+	int			w;
+	int			*block;
+	int			max;
 	char		*name;
 	t_texture	tex;
 	t_bool		texture;
-}			t_map;
+}				t_map;
 
-typedef struct		s_mlx
+typedef struct	s_mlx
 {
 	char		*adr;
-	int		bpp;
-	int		end;
-	int		sln;
+	int			bpp;
+	int			end;
+	int			sln;
 	void		*img;
 	void		*mlx;
 	void		*win;
-}			t_mlx;
+}				t_mlx;
 
-typedef struct		s_env
+typedef struct	s_env
 {
 	t_mlx		mlx;
 	t_cam		cam;
@@ -88,7 +88,7 @@ typedef struct		s_env
 	t_ray		ray;
 	t_line		line;
 	char		event;
-}			t_env;
+}				t_env;
 
 /*
 ** ===================== MAIN.C ==============================
