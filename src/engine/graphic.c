@@ -61,7 +61,7 @@ void			hello_world(t_env *e)
 			tmp.r = col.r * 255.99;
 			tmp.g = col.g * 255.99;
 			tmp.b = col.b * 255.99;
-			img_pixel_put(e, i, j, tmp);	
+			img_pixel_put(e, i, j, tmp);
 			i--;
 		}
 		j--;

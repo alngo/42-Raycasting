@@ -27,17 +27,6 @@ void			line_basic_draw(t_env *e, t_line *line)
 	}
 }
 
-t_frgba			get_col_from_img(char *ptr, int pos)
-{
-	t_frgba		ret;
-
-	ret.r = ptr[pos];
-	ret.g = ptr[pos + 1];
-	ret.b = ptr[pos + 2];
-	ret.a = ptr[pos + 3];
-	return (ret);
-}
-
 void			line_textu_draw(t_env *e, t_line *line)
 {
 	double		wall_x;

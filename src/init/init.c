@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:06:55 by alngo             #+#    #+#             */
-/*   Updated: 2018/01/05 14:23:02 by alngo            ###   ########.fr       */
+/*   Updated: 2018/01/05 14:43:07 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ static	void		init_cam(t_env *e, t_cam *cam, t_map *map)
 
 void			init_env(t_env *e, const char *file)
 {
+	init_null_secure(e);
 	if (!(e->mlx.mlx = mlx_init()))
 		checkout(e, "Error: mlx_init().");
-	init_null_secure(e);
 	init_map(e, file);
 	init_cam(e, &e->cam, &(e->map));
 	if (!(e->mlx.win = mlx_new_window(e->mlx.mlx, WIDTH, HEIGHT, e->map.name)))
