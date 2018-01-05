@@ -6,7 +6,7 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:06:55 by alngo             #+#    #+#             */
-/*   Updated: 2018/01/02 15:38:55 by alngo            ###   ########.fr       */
+/*   Updated: 2018/01/05 14:23:02 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void			init_env(t_env *e, const char *file)
 			, &(e->mlx.sln), &(e->mlx.end));
 	show_block(e->map.block, e->map.w, e->map.max);
 	ft_printf("Camera position:\n[%d][%d]\n", (int)e->cam.pos.x, (int)e->cam.pos.y);
-	ft_printf("In [%s] [%d]\n", e->map.tex.dir, e->map.tex.len);
 	ft_printf("Init done !\n");
 }
 

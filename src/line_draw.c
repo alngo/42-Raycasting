@@ -27,6 +27,17 @@ void			line_basic_draw(t_env *e, t_line *line)
 	}
 }
 
+t_frgba			get_col_from_img(char *ptr, int pos)
+{
+	t_frgba		ret;
+
+	ret.r = ptr[pos];
+	ret.g = ptr[pos + 1];
+	ret.b = ptr[pos + 2];
+	ret.a = ptr[pos + 3];
+	return (ret);
+}
+
 void			line_textu_draw(t_env *e, t_line *line)
 {
 	double		wall_x;
@@ -37,8 +48,11 @@ void			line_textu_draw(t_env *e, t_line *line)
 	int			y;
 	int			x;
 	char		*ptr;
+	int			bpp;
+	int			sln;
+	int			end;
 
-	ptr = (char *)e->map.tex.tex[line->tex_nu];
+	ptr = mlx_get_data_addr(e->map.tex.tex[line->tex_nu], &bpp, &sln, &end);
 	if (e->line.side)
 		wall_x = e->ray.pos.x + e->ray.wall * e->ray.dir.x;
 	else
@@ -55,8 +69,7 @@ void			line_textu_draw(t_env *e, t_line *line)
 	{
 		d = y * 256 - HEIGHT * 128 + line->height * 128;
 		textu_y = ((d * TEXTURE_HEIGHT) / line->height) / 256;
-//		pix_col.r = ptr[0];
-		pix_col = ft_frgba(255,0,0,0);
+		pix_col = ft_inttofrgba(((int *)ptr)[textu_y * TEXTURE_WIDTH + textu_x]);
 		if (line->side)
 			pix_col = shadow(pix_col);
 		img_pixel_put(e, x, y, pix_col);
