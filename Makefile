@@ -7,6 +7,7 @@ LIBFT = ./libft/libft.a
 LIBMLX = ./mlx/libmlx.a
 
 SRC_NAME =	main.c\
+		pthread.c\
 		utils.c\
 		ray.c\
 		line.c\

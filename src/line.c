@@ -53,12 +53,12 @@ static void		line_get_type(t_env *e, t_line *line, int *mapx, int *mapy)
 		line_set_text_num(e, line, block);
 }
 
-void			line_cast(t_env *e, int *mapx, int *mapy, int x)
+void			line_cast(t_env *e, int *mapx, int *mapy, int x, int id)
 {
-	line_init_calc(&e->ray, &e->line, x);
-	line_get_type(e, &e->line, mapx, mapy);
+	line_init_calc(&e->ray[id], &e->line[id], x);
+	line_get_type(e, &e->line[id], mapx, mapy);
 	if (!e->map.texture)
-		line_basic_draw(e, &e->line);
+		line_basic_draw(e, &e->line[id]);
 	else
-		line_textu_draw(e, &e->line);
+		line_textu_draw(e, &e->line[id], &e->ray[id]);
 }

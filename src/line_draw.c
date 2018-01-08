@@ -27,7 +27,7 @@ void			line_basic_draw(t_env *e, t_line *line)
 	}
 }
 
-void			line_textu_draw(t_env *e, t_line *line)
+void			line_textu_draw(t_env *e, t_line *line, t_ray *ray)
 {
 	double		wall_x;
 	int			textu_x;
@@ -42,15 +42,15 @@ void			line_textu_draw(t_env *e, t_line *line)
 	int			end;
 
 	ptr = mlx_get_data_addr(e->map.tex.tex[line->tex_nu], &bpp, &sln, &end);
-	if (e->line.side)
-		wall_x = e->ray.pos.x + e->ray.wall * e->ray.dir.x;
+	if (line->side)
+		wall_x = ray->pos.x + ray->wall * ray->dir.x;
 	else
-		wall_x = e->ray.pos.y + e->ray.wall * e->ray.dir.y;
+		wall_x = ray->pos.y + ray->wall * ray->dir.y;
 	wall_x -= (int)wall_x;
 	textu_x = (int)(wall_x * TEXTURE_WIDTH);
-	if (!line->side && e->ray.dir.x > 0)
+	if (!line->side && ray->dir.x > 0)
 		textu_x = TEXTURE_WIDTH - textu_x - 1;
-	if (line->side && e->ray.dir.y < 0)
+	if (line->side && ray->dir.y < 0)
 		textu_x = TEXTURE_WIDTH - textu_x - 1;
 	x = line->start.x;
 	y = line->start.y;
