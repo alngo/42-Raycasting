@@ -5,10 +5,13 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
+# include <pthread.h>
 # include "x11.h"
 
-# define WIDTH 	900
-# define HEIGHT 600
+# define WIDTH 		900
+# define HEIGHT		600
+
+# define NUM_THREADS	4
 
 # define SPEED		0.1
 # define MOVE_FORWARD	0b00000001
@@ -17,6 +20,7 @@
 # define STRAFE_RIGHT 	0b00001000
 # define ROTATE_RIGHT 	0b00010000
 # define ROTATE_LEFT 	0b00100000
+
 
 typedef struct		s_cam
 {
@@ -70,10 +74,28 @@ typedef struct		s_env
 	t_mlx		mlx;
 	t_cam		cam;
 	t_map		map;
-	t_ray		ray;
-	t_line		line;
+	t_ray		ray[NUM_THREADS];
+	t_line		line[NUM_THREADS];
 	int8_t		event;
 }			t_env;
+
+typedef struct		s_thread_data
+{
+	t_env		*e;
+	int		id;
+	int		start;
+	int		stop;
+	int		mapx;
+	int		mapy;
+}			t_thread_data;
+
+typedef struct		s_thread
+{
+	pthread_t	thread[NUM_THREADS];
+	t_thread_data	thread_data[NUM_THREADS];
+	pthread_attr_t	attr;
+	void		*status;
+}			t_thread;
 
 /*
 ** ===================== MAIN.C ==============================
@@ -86,14 +108,14 @@ void			render(t_env *e);
 ** ray_cast_dda
 ** ray_wall_calc
 */
-void			ray_cast(t_env *e, int *mapx, int *mapy, int x);
+void			ray_cast(t_env *e, int *mapx, int *mapy, int x, int id);
 /*
 ** ===================== LINE.C ==============================
 ** ray_init_calc
 ** line_get_color
 ** line_draw
 */
-void			line_cast(t_env *e, int *mapx, int *mapy, int x);
+void			line_cast(t_env *e, int *mapx, int *mapy, int x, int id);
 /*
 ** ===================== GRAPHIC.C ===========================
 */
@@ -120,6 +142,14 @@ void			rotate(t_env *e, int key);
 void			checkout(t_env *e, char *s);
 void			hello_world(t_env *e);
 void			show_map_block(t_map *map);
+/*
+** ===================== PTHREAD.C ==========================
+** thread_init_data
+** thread_render_part
+** thread_create
+** thread_join
+*/
+void			thread_process(t_env *e, t_thread *t);
 /*
 ** ===================== INIT.C =-=========================
 ** init_null_secure
