@@ -7,14 +7,14 @@ LIBFT = ./libft/libft.a
 LIBMLX = ./mlx/libmlx.a
 
 SRC_NAME =	main.c\
-		pthread.c\
-		utils.c\
 		ray.c\
 		line.c\
 		line_draw.c\
-		movement.c\
 		engine/graphic.c\
 		engine/input.c\
+		engine/movement.c\
+		engine/pthread.c\
+		engine/utils.c\
 		init/get_map_block.c\
 		init/get_map_info.c\
 		init/get_map_texture.c\
