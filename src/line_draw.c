@@ -58,7 +58,7 @@ void			line_textu_draw(t_env *e, t_line *line, t_ray *ray)
 	{
 		d = y * 256 - HEIGHT * 128 + line->height * 128;
 		textu_y = ((d * TEXTURE_HEIGHT) / line->height) / 256;
-		pix_col = ft_inttofrgba(((int *)ptr)[textu_y * TEXTURE_WIDTH + textu_x]);
+		pix_col = ft_inttofrgba(((int *)ptr)[textu_y * TEXTURE_WIDTH + textu_x] << 8);
 		if (line->side)
 			pix_col = shadow(pix_col);
 		img_pixel_put(e, x, y, pix_col);

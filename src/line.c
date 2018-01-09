@@ -39,7 +39,7 @@ static void		line_set_text_num(t_env *e, t_line *line, int block)
 			break;
 		i++;
 	}
-	line->tex_nu = i;
+	line->tex_nu = i == e->map.tex.len ? 0 : i;
 }
 
 static void		line_get_type(t_env *e, t_line *line, int *mapx, int *mapy)

@@ -2,11 +2,12 @@
 #width:		10
 #height:	10
 #texture:
-#texture_num:	1
-#texture_dir:	./textures/
+#texture_num:	3
+#texture_dir:	./texture/
 #list:
-42			test
-2			eridu1.xpm
+42			wall_brown.xpm
+2			blue_brick.xpm
+3			floor.xpm
 ===
 42 42 42 42 42 42 42 42 42 42
 42 0  0  0  0  0  0  0  0  42
@@ -15,6 +16,6 @@
 42 0  0  0  0  42 0  0  0  42
 42 0  0  42 0  0  0  0  0  42
 42 0  0  0  0  0  0  0  0  42
-42 0  0  0  0  0  0  0  0  42
+42 0  2  0  0  3  0  0  0  42
 42 0  0  0  0  0  0  0  0  42
 42 42 42 42 42 42 42 42 42 42
