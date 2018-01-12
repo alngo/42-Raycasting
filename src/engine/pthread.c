@@ -24,7 +24,7 @@ static void		thread_init_data(t_env *e, t_thread_data data[NUM_THREADS])
 }
 
 static void		*thread_render_part(void *data)
-{	
+{
 	t_thread_data	*arg;
 	int		stop;
 	int		x;
@@ -36,6 +36,7 @@ static void		*thread_render_part(void *data)
 	{
 		ray_cast(arg->e, x, arg->id);
 		line_cast(arg->e, x, arg->id);
+		floor_cast(arg->e, x, arg->id);
 		x++;
 	}
 	pthread_exit(NULL);

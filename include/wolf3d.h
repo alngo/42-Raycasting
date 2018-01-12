@@ -140,6 +140,10 @@ int			get_map_texture(t_env *e, const int fd);
 */
 int			get_map_block(t_env *e, const int fd);
 /*
+**
+*/
+void		floor_cast(t_env *e, int x, int id);
+/*
 ** ===================== RAY.C ===============================
 ** ray_init_calc
 ** ray_step_calc

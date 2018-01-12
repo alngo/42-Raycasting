@@ -9,6 +9,7 @@ LIBMLX = ./mlx/libmlx.a
 SRC_NAME =	main.c\
 		ray.c\
 		line.c\
+		floor.c\
 		line_draw.c\
 		engine/graphic.c\
 		engine/input.c\
