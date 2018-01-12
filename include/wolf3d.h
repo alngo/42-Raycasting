@@ -26,90 +26,90 @@
 
 typedef struct		s_texture
 {
-	char		*dir;
-	int		len;
-	int		*number;
-	void		**tex;
-}			t_texture;
+	char			*dir;
+	int				len;
+	int				*number;
+	void			**tex;
+}					t_texture;
 
 typedef struct		s_cam
 {
-	t_vec2d		pos;
-	t_vec2d		dir;
-	t_vec2d		plane;
-}			t_cam;
+	t_vec2d			pos;
+	t_vec2d			dir;
+	t_vec2d			plane;
+}					t_cam;
 
 typedef struct		s_ray
 {
-	t_vec2d		pos;
-	t_vec2d		dir;
-	t_vec2d		d_side;
-	t_vec2d		d_delta;
-	t_vec2d		step;
-	t_bool		hit;
-	t_bool		side;
-	int		mapx;
-	int		mapy;
-	double		wall;
-}			t_ray;
+	t_vec2d			pos;
+	t_vec2d			dir;
+	t_vec2d			d_side;
+	t_vec2d			d_delta;
+	t_vec2d			step;
+	t_bool			hit;
+	t_bool			side;
+	int				mapx;
+	int				mapy;
+	double			wall;
+}					t_ray;
 
 typedef struct		s_line
 {
-	t_vec2d		start;
-	t_vec2d		end;
-	t_frgba		col;
-	t_bool		side;
-	int		tex_nu;
-	int		height;
-}			t_line;
+	t_vec2d			start;
+	t_vec2d			end;
+	t_frgba			col;
+	t_bool			side;
+	int				tex_nu;
+	int				height;
+}					t_line;
 
 typedef struct		s_map
 {
-	int		h;
-	int		w;
-	int		*block;
-	int		max;
-	char		*name;
-	t_texture	tex;
-	t_bool		texture;
-}			t_map;
+	int				h;
+	int				w;
+	int				*block;
+	int				max;
+	char			*name;
+	t_texture		tex;
+	t_bool			texture;
+}					t_map;
 
 typedef struct		s_mlx
 {
-	char		*adr;
-	int		bpp;
-	int		end;
-	int		sln;
-	void		*img;
-	void		*mlx;
-	void		*win;
-}			t_mlx;
+	char			*adr;
+	int				bpp;
+	int				end;
+	int				sln;
+	void			*img;
+	void			*mlx;
+	void			*win;
+}					t_mlx;
 
 typedef struct		s_env
 {
-	t_mlx		mlx;
-	t_cam		cam;
-	t_map		map;
-	t_ray		ray[NUM_THREADS];
-	t_line		line[NUM_THREADS];
-	int8_t		event;
-}			t_env;
+	t_mlx			mlx;
+	t_cam			cam;
+	t_map			map;
+	t_ray			ray[NUM_THREADS];
+	t_line			line[NUM_THREADS];
+	int8_t			event;
+}					t_env;
 
 typedef struct		s_thread_data
 {
-	t_env		*e;
-	int		id;
-	int		start;
-	int		stop;
-}			t_thread_data;
+	t_env			*e;
+	int				id;
+	int				start;
+	int				stop;
+}					t_thread_data;
 
 typedef struct		s_thread
 {
-	pthread_t	thread[NUM_THREADS];
+	pthread_t		thread[NUM_THREADS];
 	t_thread_data	thread_data[NUM_THREADS];
 	pthread_attr_t	attr;
-	void		*status;
-}			t_thread;
+	void			*status;
+}					t_thread;
 
 /*
 ** ===================== MAIN.C ==============================
