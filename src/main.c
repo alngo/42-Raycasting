@@ -3,7 +3,7 @@
 void			render(t_env *e)
 {
 	t_thread	t;
-	
+
 	thread_process(e, &t);
 	mlx_put_image_to_window(e->mlx.mlx, e->mlx.win, e->mlx.img, 0, 0);
 	img_fill(e, ft_frgba(0, 0, 0, 0));

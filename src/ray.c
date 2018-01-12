@@ -53,12 +53,14 @@ static void		ray_cast_dda(t_ray *ray, t_map *map, int *mapx, int *mapy)
 			ray->d_side.x = ray->d_side.x + ray->d_delta.x;
 			*mapx = *mapx + ray->step.x;
 			ray->side = false;
+			ray->orientation = ray->dir.x < 0 ? NORTH : SOUTH;
 		}
 		else
 		{
 			ray->d_side.y = ray->d_side.y + ray->d_delta.y;
 			*mapy = *mapy + ray->step.y;
 			ray->side = true;
+			ray->orientation = ray->dir.y < 0 ? EAST : WEST;
 		}
 		if (map->block[*mapy * map->w + *mapx] > 0)
 			ray->hit = true;
@@ -79,4 +81,5 @@ void			ray_cast(t_env *e, int x, int id)
 	ray_step_calc(&e->ray[id], &e->ray[id].mapx, &e->ray[id].mapy);
 	ray_cast_dda(&e->ray[id], &e->map, &e->ray[id].mapx, &e->ray[id].mapy);
 	ray_wall_calc(&e->ray[id], &e->ray[id].mapx, &e->ray[id].mapy);
+	e->line[id].orientation = e->ray[id].orientation;
 }

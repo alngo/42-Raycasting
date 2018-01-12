@@ -21,6 +21,11 @@
 # define ROTATE_RIGHT 	0b00010000
 # define ROTATE_LEFT 	0b00100000
 
+# define NORTH			0
+# define EAST			1
+# define SOUTH			2
+# define WEST			3
+
 # define TEXTURE_WIDTH	64
 # define TEXTURE_HEIGHT	64
 
@@ -48,6 +53,7 @@ typedef struct		s_ray
 	t_vec2d			step;
 	t_bool			hit;
 	t_bool			side;
+	int				orientation;
 	int				mapx;
 	int				mapy;
 	double			wall;
@@ -59,6 +65,7 @@ typedef struct		s_line
 	t_vec2d			end;
 	t_frgba			col;
 	t_bool			side;
+	int				orientation;
 	int				tex_nu;
 	int				height;
 }					t_line;

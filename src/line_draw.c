@@ -1,16 +1,5 @@
 #include "wolf3d.h"
 
-static t_frgba		shadow(t_frgba col)
-{
-	t_frgba		ret;
-
-	ret.r = col.r / 2;
-	ret.g = col.g / 2;
-	ret.b = col.b / 2;
-	ret.a = col.a;
-	return (ret);
-}
-
 void			line_basic_draw(t_env *e, t_line *line)
 {
 	int			x;
@@ -19,7 +8,7 @@ void			line_basic_draw(t_env *e, t_line *line)
 
 	x = line->start.x;
 	y = line->start.y;
-	col = line->side ? shadow(line->col) : line->col;
+	col = line->col;
 	while (y < line->end.y)
 	{
 		img_pixel_put(e, x, y, col);
