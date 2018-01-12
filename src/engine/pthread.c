@@ -4,11 +4,13 @@ static void		thread_init_data(t_env *e, t_thread_data data[NUM_THREADS])
 {
 	int		i;
 	int		diff;
+	int		ret;
 	int		start;
 
 	i = 0;
 	start = 0;
 	diff = WIDTH / NUM_THREADS;
+	ret = WIDTH % NUM_THREADS;
 	while (i < NUM_THREADS)
 	{
 		data[i].e = e;
@@ -18,6 +20,7 @@ static void		thread_init_data(t_env *e, t_thread_data data[NUM_THREADS])
 		start = data[i].stop;
 		i++;
 	}
+	data[i - 1].stop += ret;
 }
 
 static void		*thread_render_part(void *data)
@@ -31,8 +34,8 @@ static void		*thread_render_part(void *data)
 	stop = arg->stop;
 	while (x < stop)
 	{
-		ray_cast(arg->e, &arg->mapx, &arg->mapy, x, arg->id);
-		line_cast(arg->e, &arg->mapx, &arg->mapy, x, arg->id);
+		ray_cast(arg->e, x, arg->id);
+		line_cast(arg->e, x, arg->id);
 		x++;
 	}
 	pthread_exit(NULL);

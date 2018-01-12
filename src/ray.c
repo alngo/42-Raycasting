@@ -73,10 +73,10 @@ static void		ray_wall_calc(t_ray *ray, int *mapx, int *mapy)
 		ray->wall = (*mapx - ray->pos.x + (1 - ray->step.x) / 2) / ray->dir.x;
 }
 
-void			ray_cast(t_env *e, int *mapx, int *mapy, int x, int id)
+void			ray_cast(t_env *e, int x, int id)
 {
 	ray_init_calc(&e->ray[id], &e->cam, x);
-	ray_step_calc(&e->ray[id], mapx, mapy);
-	ray_cast_dda(&e->ray[id], &e->map, mapx, mapy);
-	ray_wall_calc(&e->ray[id], mapx, mapy);
+	ray_step_calc(&e->ray[id], &e->ray[id].mapx, &e->ray[id].mapy);
+	ray_cast_dda(&e->ray[id], &e->map, &e->ray[id].mapx, &e->ray[id].mapy);
+	ray_wall_calc(&e->ray[id], &e->ray[id].mapx, &e->ray[id].mapy);
 }

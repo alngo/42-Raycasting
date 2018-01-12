@@ -24,22 +24,22 @@
 # define TEXTURE_WIDTH	64
 # define TEXTURE_HEIGHT	64
 
-typedef struct	s_texture
+typedef struct		s_texture
 {
 	char		*dir;
-	int			len;
-	int			*number;
+	int		len;
+	int		*number;
 	void		**tex;
-}				t_texture;
+}			t_texture;
 
-typedef struct	s_cam
+typedef struct		s_cam
 {
 	t_vec2d		pos;
 	t_vec2d		dir;
 	t_vec2d		plane;
-}				t_cam;
+}			t_cam;
 
-typedef struct	s_ray
+typedef struct		s_ray
 {
 	t_vec2d		pos;
 	t_vec2d		dir;
@@ -48,42 +48,44 @@ typedef struct	s_ray
 	t_vec2d		step;
 	t_bool		hit;
 	t_bool		side;
+	int		mapx;
+	int		mapy;
 	double		wall;
-}				t_ray;
+}			t_ray;
 
-typedef struct	s_line
+typedef struct		s_line
 {
 	t_vec2d		start;
 	t_vec2d		end;
 	t_frgba		col;
 	t_bool		side;
-	int			tex_nu;
-	int			height;
-}				t_line;
+	int		tex_nu;
+	int		height;
+}			t_line;
 
-typedef struct	s_map
+typedef struct		s_map
 {
-	int			h;
-	int			w;
-	int			*block;
-	int			max;
+	int		h;
+	int		w;
+	int		*block;
+	int		max;
 	char		*name;
 	t_texture	tex;
 	t_bool		texture;
-}				t_map;
+}			t_map;
 
-typedef struct	s_mlx
+typedef struct		s_mlx
 {
 	char		*adr;
-	int			bpp;
-	int			end;
-	int			sln;
+	int		bpp;
+	int		end;
+	int		sln;
 	void		*img;
 	void		*mlx;
 	void		*win;
-}				t_mlx;
+}			t_mlx;
 
-typedef struct	s_env
+typedef struct		s_env
 {
 	t_mlx		mlx;
 	t_cam		cam;
@@ -99,8 +101,6 @@ typedef struct		s_thread_data
 	int		id;
 	int		start;
 	int		stop;
-	int		mapx;
-	int		mapy;
 }			t_thread_data;
 
 typedef struct		s_thread
@@ -146,7 +146,7 @@ int			get_map_block(t_env *e, const int fd);
 ** ray_cast_dda
 ** ray_wall_calc
 */
-void			ray_cast(t_env *e, int *mapx, int *mapy, int x, int id);
+void			ray_cast(t_env *e, int x, int id);
 /*
 ** ===================== LINE.C ==============================
 ** line_init_calc
@@ -154,7 +154,7 @@ void			ray_cast(t_env *e, int *mapx, int *mapy, int x, int id);
 ** line_set_text_num
 ** line_get_type
 */
-void			line_cast(t_env *e, int *mapx, int *mapy, int x, int id);
+void			line_cast(t_env *e, int x, int id);
 /*
 ** ===================== LINE_DRAW.C =========================
 ** shadow
