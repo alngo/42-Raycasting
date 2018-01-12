@@ -1,5 +1,13 @@
 #include "wolf3d.h"
 
+int		red_cross(int key, t_env *e)
+{
+	(void)key;
+	(void)e;
+	exit(0);
+	return (0);
+}
+
 int		key_pressed(int key, t_env *e)
 {
 	if (key == ECHAP_KEY)

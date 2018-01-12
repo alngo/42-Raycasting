@@ -170,6 +170,7 @@ void			hello_world(t_env *e);
 /*
 ** ===================== INPUT.C =============================
 */
+int			red_cross(int key, t_env *e);
 int			key_pressed(int key, t_env *e);
 int			key_released(int key, t_env *e);
 int			key_loop(t_env *e);
