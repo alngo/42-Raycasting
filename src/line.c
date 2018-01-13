@@ -14,31 +14,17 @@ static void		line_init_calc(t_ray *ray, t_line *line, int x)
 	line->side = ray->side;
 }
 
-static t_frgba		shadow(t_frgba col)
-{
-	t_frgba		ret;
-
-	ret.r = col.r / 2;
-	ret.g = col.g / 2;
-	ret.b = col.b / 2;
-	ret.a = col.a;
-	return (ret);
-}
-
 static void		line_set_basic_color(t_line *line, int block)
 {
-	if (block == 1)
+	(void)block;
+	if (line->orientation == 0)
 		line->col = ft_frgba(255, 0, 0, 0);
-	else if (block == 2)
+	else if (line->orientation == 1)
 		line->col = ft_frgba(0, 255, 0, 0);
-	else if (block == 3)
+	else if (line->orientation == 2)
 		line->col = ft_frgba(0, 0, 255, 0);
-	else if (block == 4)
+	else if (line->orientation == 3)
 		line->col = ft_frgba(255, 255, 255, 0);
-	else
-		line->col = ft_frgba(50, 50, 50, 0);
-	if (line->side)
-		line->col = shadow(line->col);
 }
 
 static void		line_set_text_num(t_env *e, t_line *line, int block)
