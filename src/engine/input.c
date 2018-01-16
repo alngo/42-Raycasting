@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/16 18:37:36 by alngo             #+#    #+#             */
+/*   Updated: 2018/01/16 18:38:56 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 int		red_cross(int key, t_env *e)
@@ -53,7 +65,7 @@ int		key_loop(t_env *e)
 	if (e->event & MOVE_FORWARD)
 		move(e, W_KEY);
 	if (e->event & MOVE_BACKWARD)
-	 	move(e, S_KEY);
+		move(e, S_KEY);
 	if (e->event & STRAFE_LEFT)
 		strafe(e, A_KEY);
 	if (e->event & STRAFE_RIGHT)

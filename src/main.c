@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/16 18:26:47 by alngo             #+#    #+#             */
+/*   Updated: 2018/01/16 18:56:41 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void			render(t_env *e)
@@ -9,11 +21,11 @@ void			render(t_env *e)
 	img_fill(e, ft_frgba(0, 0, 0, 0));
 }
 
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
-	(void)ac;
 	t_env		e;
 
+	(void)ac;
 	init_env(&e, av[1]);
 	render(&e);
 	hello_world(&e);

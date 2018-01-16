@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map_block.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/16 18:37:09 by alngo             #+#    #+#             */
+/*   Updated: 2018/01/16 18:46:21 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 static int		check_map_block(char *str)
@@ -16,7 +28,7 @@ static int		stock_map_block(t_env *e, char **data)
 	while (*data)
 	{
 		if (index == e->map.max)
-			break;
+			break ;
 		e->map.block[index] = ft_atoi(*data);
 		free(*data);
 		data++;
@@ -25,7 +37,7 @@ static int		stock_map_block(t_env *e, char **data)
 	return (index);
 }
 
-int			get_map_block(t_env *e, const int fd)
+int				get_map_block(t_env *e, const int fd)
 {
 	char		*line;
 	char		**tmp;

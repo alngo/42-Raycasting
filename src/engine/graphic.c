@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphic.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/16 18:37:30 by alngo             #+#    #+#             */
+/*   Updated: 2018/01/16 18:38:19 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void			img_pixel_put(t_env *e, int x, int y, t_frgba c)
@@ -43,8 +55,8 @@ void			img_fill(t_env *e, t_frgba c)
 
 void			hello_world(t_env *e)
 {
-	int		i;
-	int		j;
+	int			i;
+	int			j;
 	t_frgba		col;
 	t_frgba		tmp;
 
@@ -52,7 +64,7 @@ void			hello_world(t_env *e)
 	tmp.a = 0;
 	while (j >= 0)
 	{
-		i = WIDTH -1;
+		i = WIDTH - 1;
 		while (i >= 0)
 		{
 			col.r = (float)i / (float)WIDTH;

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map_info.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/16 18:37:11 by alngo             #+#    #+#             */
+/*   Updated: 2018/01/16 18:45:56 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
-static char		*stock_map_name(const char *name)
+static char	*stock_map_name(const char *name)
 {
 	int		i;
 
@@ -12,7 +24,7 @@ static char		*stock_map_name(const char *name)
 	return (ft_strdup((char *)&name[i]));
 }
 
-static int		stock_map_info(t_env *e, const char *line)
+static int	stock_map_info(t_env *e, const char *line)
 {
 	if (ft_strstr(line, "#name:"))
 	{
@@ -39,7 +51,7 @@ static int		stock_map_info(t_env *e, const char *line)
 int			get_map_info(t_env *e, const int fd)
 {
 	int		ret;
-	char		*line;
+	char	*line;
 
 	while (get_next_line(fd, &line))
 	{
@@ -47,7 +59,7 @@ int			get_map_info(t_env *e, const int fd)
 			return (0);
 		free(line);
 		if (ret)
-			break;
+			break ;
 	}
 	if (!(e->map.w) || !(e->map.h) || e->map.w > 50 || e->map.h > 50)
 		return (0);

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pthread.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/16 18:37:40 by alngo             #+#    #+#             */
+/*   Updated: 2018/01/16 18:40:31 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
-static void		thread_init_data(t_env *e, t_thread_data data[NUM_THREADS])
+static void			thread_init_data(t_env *e, t_thread_data data[NUM_THREADS])
 {
-	int		i;
-	int		diff;
-	int		ret;
-	int		start;
+	int				i;
+	int				diff;
+	int				ret;
+	int				start;
 
 	i = 0;
 	start = 0;
@@ -23,11 +35,11 @@ static void		thread_init_data(t_env *e, t_thread_data data[NUM_THREADS])
 	data[i - 1].stop += ret;
 }
 
-static void		*thread_render_part(void *data)
+static void			*thread_render_part(void *data)
 {
 	t_thread_data	*arg;
-	int		stop;
-	int		x;
+	int				stop;
+	int				x;
 
 	arg = (t_thread_data *)data;
 	x = arg->start;
@@ -42,10 +54,10 @@ static void		*thread_render_part(void *data)
 	pthread_exit(NULL);
 }
 
-static void		thread_create(t_env *e, t_thread *t)
+static void			thread_create(t_env *e, t_thread *t)
 {
-	int		i;
-	int		ret;
+	int				i;
+	int				ret;
 
 	thread_init_data(e, t->thread_data);
 	pthread_attr_init(&t->attr);
@@ -53,7 +65,8 @@ static void		thread_create(t_env *e, t_thread *t)
 	i = 0;
 	while (i < NUM_THREADS)
 	{
-		ret = pthread_create(&t->thread[i], &t->attr, thread_render_part, &t->thread_data[i]);
+		ret = pthread_create(&t->thread[i], &t->attr
+				, thread_render_part, &t->thread_data[i]);
 		if (ret)
 			checkout(e, "pthread_create() error.");
 		i++;
@@ -61,10 +74,10 @@ static void		thread_create(t_env *e, t_thread *t)
 	pthread_attr_destroy(&t->attr);
 }
 
-static void		thread_join(t_env *e, t_thread *t)
+static void			thread_join(t_env *e, t_thread *t)
 {
-	int		i;
-	int		ret;
+	int				i;
+	int				ret;
 
 	i = 0;
 	while (i < NUM_THREADS)
@@ -76,7 +89,7 @@ static void		thread_join(t_env *e, t_thread *t)
 	}
 }
 
-void			thread_process(t_env *e, t_thread *t)
+void				thread_process(t_env *e, t_thread *t)
 {
 	thread_create(e, t);
 	thread_join(e, t);

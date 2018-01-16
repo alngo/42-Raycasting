@@ -6,13 +6,13 @@
 /*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 19:06:55 by alngo             #+#    #+#             */
-/*   Updated: 2018/01/05 14:43:07 by alngo            ###   ########.fr       */
+/*   Updated: 2018/01/16 18:48:44 by alngo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-static void		init_null_secure(t_env *e)
+static void			init_null_secure(t_env *e)
 {
 	e->event = 0;
 	e->mlx.win = NULL;
@@ -30,10 +30,10 @@ static void		init_null_secure(t_env *e)
 	e->map.max = 0;
 }
 
-static	void		init_map(t_env *e, const char *file)
+static void			init_map(t_env *e, const char *file)
 {
-	int		fd;
-	int		ret;
+	int				fd;
+	int				ret;
 
 	if ((fd = open(file, O_RDONLY)) == -1)
 		checkout(e, strerror(errno));
@@ -41,7 +41,7 @@ static	void		init_map(t_env *e, const char *file)
 		checkout(e, "get_map_info() error.");
 	if (ret == 2)
 	{
-		if(!(ret = get_map_texture(e, fd)))
+		if (!(ret = get_map_texture(e, fd)))
 			checkout(e, "get_map_texture() error.");
 	}
 	if (ret == 1)
@@ -52,16 +52,16 @@ static	void		init_map(t_env *e, const char *file)
 	close(fd);
 }
 
-static	void		init_cam(t_env *e, t_cam *cam, t_map *map)
+static void			init_cam(t_env *e, t_cam *cam, t_map *map)
 {
-	int		max;
-	t_ldiv		div;
+	int				max;
+	t_ldiv			div;
 
 	max = map->max - 1;
 	while (max >= 0)
 	{
 		if (map->block[max] == 0)
-			break;
+			break ;
 		max--;
 	}
 	if (max == -1)
@@ -75,7 +75,7 @@ static	void		init_cam(t_env *e, t_cam *cam, t_map *map)
 	cam->plane.x = 0;
 }
 
-void			init_env(t_env *e, const char *file)
+void				init_env(t_env *e, const char *file)
 {
 	init_null_secure(e);
 	if (!(e->mlx.mlx = mlx_init()))
@@ -89,7 +89,7 @@ void			init_env(t_env *e, const char *file)
 	e->mlx.adr = mlx_get_data_addr(e->mlx.img, &(e->mlx.bpp)
 			, &(e->mlx.sln), &(e->mlx.end));
 	show_block(e->map.block, e->map.w, e->map.max);
-	ft_printf("Camera position:\n[%d][%d]\n", (int)e->cam.pos.x, (int)e->cam.pos.y);
+	ft_printf("Camera position:\n[%d][%d]\n",
+			(int)e->cam.pos.x, (int)e->cam.pos.y);
 	ft_printf("Init done !\n");
 }
-

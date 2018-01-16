@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/16 18:26:45 by alngo             #+#    #+#             */
+/*   Updated: 2018/01/16 18:26:56 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 static void		line_init_calc(t_ray *ray, t_line *line, int x)
@@ -50,7 +62,7 @@ void			line_cast(t_env *e, int x, int id)
 	line_init_calc(&e->ray[id], &e->line[id], x);
 	line_get_type(e, &e->line[id], &e->ray[id].mapx, &e->ray[id].mapy);
 	if (!e->map.texture)
-		line_basic_draw(e, &e->line[id]);
+		line_basic_draw(e, &e->line[id], x);
 	else
-		line_textu_draw(e, &e->line[id], &e->ray[id]);
+		line_textu_draw(e, &e->line[id], &e->ray[id], x);
 }

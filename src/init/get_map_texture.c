@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map_texture.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alngo <alngo@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/16 18:37:12 by alngo             #+#    #+#             */
+/*   Updated: 2018/01/16 18:53:18 by alngo            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 static int		stock_tex_data(t_env *e, char *line)
@@ -20,7 +32,6 @@ static int		stock_tex_data(t_env *e, char *line)
 	index++;
 	return (1);
 }
-
 
 static int		get_tex_data(t_env *e, const int fd)
 {
@@ -49,7 +60,7 @@ static int		get_tex_data(t_env *e, const int fd)
 
 static char		*stock_tex_dir(const char *dir)
 {
-	int		i;
+	int			i;
 
 	i = 0;
 	while (ft_isspace(dir[i]) && dir[i])
@@ -76,24 +87,26 @@ static int		stock_tex_info(t_env *e, const char *line)
 	return (0);
 }
 
-int			get_map_texture(t_env *e, const int fd)
+int				get_map_texture(t_env *e, const int fd)
 {
 	char		*line;
-	int		ret;
+	int			ret;
 
 	while (get_next_line(fd, &line))
 	{
-		if ((ret = stock_tex_info(e, line)) ==  -1)
+		if ((ret = stock_tex_info(e, line)) == -1)
 			return (0);
 		free(line);
 		if (ret)
-			break;
+			break ;
 	}
 	if (ret == 2)
 	{
-		if (!(e->map.tex.number = (int *)ft_memalloc(sizeof(int) * e->map.tex.len)))
+		if (!(e->map.tex.number =
+					(int *)ft_memalloc(sizeof(int) * e->map.tex.len)))
 			return (0);
-		if (!(e->map.tex.tex = (void **)ft_memalloc(sizeof(void *) * e->map.tex.len)))
+		if (!(e->map.tex.tex =
+					(void **)ft_memalloc(sizeof(void *) * e->map.tex.len)))
 			return (0);
 		if ((ret = get_tex_data(e, fd)) == -1)
 			return (0);
