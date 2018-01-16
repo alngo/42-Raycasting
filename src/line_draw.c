@@ -19,12 +19,12 @@ void			line_basic_draw(t_env *e, t_line *line)
 void			line_textu_draw(t_env *e, t_line *line, t_ray *ray)
 {
 	double		wall_x;
-	int		textu_x;
-	int		textu_y;
-	int		d;
+	int			textu_x;
+	int			textu_y;
+	int			d;
 	t_frgba		pix_col;
-	int		y;
-	int		x;
+	int			y;
+	int			x;
 	t_mlx		tmp;
 
 	tmp.adr = mlx_get_data_addr(e->map.tex.tex[line->tex_nu], &tmp.bpp, &tmp.sln, &tmp.end);
