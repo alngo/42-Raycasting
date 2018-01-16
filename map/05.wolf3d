@@ -1,0 +1,22 @@
+#name:			10 x 10
+#width:			10
+#height:		10
+#texture:
+#texture_num:	4
+#texture_dir:	./texture/
+#list:
+1			wall_brown.xpm
+2			floor.xpm
+3			blue_brick.xpm
+4			ceil.xpm
+===
+2 2 2 2 2 2 2 2 2 1
+3 0 0 0 0 0 0 0 0 1
+3 0 0 0 0 0 0 0 0 1
+3 0 0 0 0 0 3 0 0 1
+3 0 0 0 0 0 0 0 0 1
+3 0 0 0 2 0 0 0 0 1
+3 0 0 0 0 0 0 0 0 1
+3 0 1 0 0 0 4 0 0 1
+3 0 0 0 0 0 0 0 0 1
+3 4 4 4 4 4 4 4 4 4
